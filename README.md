@@ -22,12 +22,12 @@ cargo (they are interested in the warehouse and will not be interested in excurs
 children Children cannot get a visa, relocate themselves, and go anywhere without one
 accompanying parents. Each category of tourists has specific characteristics.
  The functional duties of the representative office also include:
- 1. Storage and shipment of tourists' cargo. In the warehouse it is started on
+ I. Storage and shipment of tourists' cargo. In the warehouse it is started on
 each tourist has a weight list, marking is carried out,
 weighing, packing cargo. To send cargo
 a report is drawn up for each tourist, it indicates:
 number of seats, weight, cost of packaging, insurance, final sum.
- 2. Submission of a full financial report to the main company. All articles
+ II. Submission of a full financial report to the main company. All articles
 expenses and income - hotel, transportation, excursions, unforeseen
 expenses, calculations at the airport (loading the plane,
 unloading, take-off and landing, dispatching services, storage
