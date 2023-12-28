@@ -1,0 +1,519 @@
+#include <iostream>
+#include <fstream>
+#include <string> 
+#include <sstream> 
+
+using namespace std;
+class TheMainList{
+	string guide;
+	public:
+		
+		void CreateTheFileForTheMainListAndAddDefaultElements(){
+			ofstream CreateTheMainList("MainList.txt");
+			CreateTheMainList << "surname name patronymic age sex marital_status children Hotel luggage_weight category arrived depart\n";
+			CreateTheMainList << "------- ---- ---------- --- --- -------------- -------- ----- -------------- -------- ------- ----------\n";
+			CreateTheMainList << "Zelenyi Oleh Olexiyovych 98 man married 2 Olrah 2.5 resting 25.06.2022 30.06.2022\n";
+			CreateTheMainList << "Zelena Olena Myhailivna 96 woman married 2 Olrah 2.5 resting 25.06.2022 30.06.2022\n";
+			CreateTheMainList << "Opard Taras Tarasovych 46 man divorsed 0 Gerdur 10.5 baggage 25.01.2023 28.05.2023\n";
+			CreateTheMainList << "Salaka Marija Leonidivna 38 woman married 0 Ledogual 8.4 shopping 17.05.2019 30.06.2019\n";
+			CreateTheMainList << "Terdalkin Serafym Mykolaiovych 24 man married 0 Ledogual 21.4 baggage 17.05.2019 30.06.2019\n";
+			CreateTheMainList << "Yatoro Vladyslav Genadiiovych 58 man married 5 Olrah 15.5 resting 25.06.2023 30.06.2023\n";
+			CreateTheMainList << "Muerta Lina Jakirivna 16 woman divorsed 0 Ledogual 6.2 resting 31.02.2021 30.08.2022\n";
+			CreateTheMainList << "Tusk Spirit Breakerovych 22 man divorsed 0 Olrah 11.8 baggage 25.03.2023 28.08.2024\n";
+			CreateTheMainList << "Rubbic Padona Danylivna 18 woman married 1 Gerdur 4.5 shopping 19.10.2019 30.06.2021\n";
+			CreateTheMainList << "Johnson Emily Omanovych 34 man married 3 Ledogual 21.4 resting 14.08.2017 12.04.2022\n";
+			CreateTheMainList << "Smith Daniel Artemovych 42 man divorced 1 Olrah 7.8 shopping 05.03.2018 20.09.2022\n";
+			CreateTheMainList << "Anderson Olivia Mykolayivna 28 woman married 0 Gerdur 9.6 baggage 10.12.2019 28.07.2020\n";
+			CreateTheMainList << "Williams Ethan Leonidovych 31 man married 2 Ledogual 12.3 resting 21.05.2020 05.01.2021\n";
+			CreateTheMainList << "Brown Ava Anatoliivna 23 woman divorced 0 Olrah 5.2 shopping 15.07.2021 30.12.2021\n";
+			CreateTheMainList << "Miller Benjamin Ivanovych 37 man married 1 Gerdur 8.9 baggage 12.09.2021 28.03.2022\n";
+			CreateTheMainList << "Davis Sophia Mykhailivna 29 woman married 0 Ledogual 6.7 resting 18.11.2022 30.06.2023\n";
+			CreateTheMainList << "Wilson Liam Vasylivych 45 man married 2 Olrah 11.1 shopping 22.01.2023 28.07.2023\n";
+			CreateTheMainList << "Taylor Isabella Serhiivna 26 woman divorced 0 Gerdur 4.4 baggage 06.04.2023 20.10.2023\n";
+			CreateTheMainList << "Clark Noah Myroslavovych 33 man married 1 Ledogual 9.8 resting 14.08.2023 30.03.2024\n";
+			CreateTheMainList << "Harrison Mia Andriivna 39 woman married 2 Olrah 10.5 shopping 25.09.2024 30.12.2024\n";
+			CreateTheMainList << "Anderson Ethan Serhiiovych 31 man divorced 0 Gerdur 7.2 baggage 01.02.2025 28.08.2025\n";
+			CreateTheMainList << "Moore Charlotte Ivanivna 27 woman married 0 Ledogual 6.4 resting 10.05.2025 20.11.2025\n";
+			CreateTheMainList << "Parker Oliver Mykhailovych 36 man married 2 Olrah 11.9 shopping 18.08.2025 30.03.2026\n";
+			CreateTheMainList << "Miller Amelia Yaroslavivna 24 woman divorced 0 Gerdur 5.6 baggage 02.11.2026 20.05.2027\n";
+			CreateTheMainList << "Davis Benjamin Serhiiovych 33 man married 1 Ledogual 9.2 resting 09.02.2027 30.08.2027\n";
+			CreateTheMainList << "Wilson Harper Romanivna 29 woman married 0 Olrah 4.9 shopping 15.05.2027 20.11.2027\n";
+			CreateTheMainList << "Thompson Henry Yaroslavovych 41 man divorced 3 Gerdur 12.7 baggage 18.05.2023 21.08.2027\n";
+			CreateTheMainList.close();
+		}
+		
+		TheMainList(string called){
+			guide = called;
+		}		
+		
+		void MainChecker(){
+			if(guide == "ShowTheMainList"){
+				string line, memory, delim = " ", token1;
+				int countOfLines = 0;
+				fstream ReadFromTheMainList("MainList.txt");
+				while(getline(ReadFromTheMainList, line)){
+					size_t pos = 0;
+					int counter = 0; 
+					countOfLines++;
+					cout << "|";
+					
+					while((pos = line.find(delim)) != std::string::npos){
+						counter++;
+						token1 = line.substr(0, pos);
+						cout << token1;
+						if(counter == 4 || counter == 5){
+							int lengthForTheCMD = 7 - token1.length();
+							for(int i = 0; i<lengthForTheCMD-1; i++){
+								if(countOfLines !=2){
+									cout << " ";
+								}else{
+									cout << "-";
+								}
+							}
+							cout << "|";
+						}else{
+							int lengthForTheCMD = 16 - token1.length();
+							for(int i = 0; i<lengthForTheCMD-1; i++){
+								if(countOfLines !=2){
+									cout << " ";
+								}else{
+									cout << "-";
+								}
+							}
+							cout << "|";
+						}
+						
+						line.erase(0, pos + delim.length());
+						
+						if(counter == 11 && countOfLines > 1){
+							cout << line << "|";
+						}else if(counter == 11){
+							cout << line << "    |";
+						}
+					}
+					cout << "\n";
+				}
+				
+			ReadFromTheMainList.close();	
+			}
+		
+		
+			if(guide == "AddElementsToTheList"){
+				string watcher;
+				cin.ignore();
+				while(watcher != "OP_Finish"){
+					cout << "Please print the line as in example or print OP_Finish to finish adding:\n";
+					string line;
+					int counterForExample = 0, counterForChecking = 0;
+					fstream ReadFromTheMainListForTheExample("MainList.txt");
+					string memory, delim = " ", token1;
+					size_t pos = 0;
+					
+					while(getline(ReadFromTheMainListForTheExample, line)){
+					counterForExample++;
+					
+						if(counterForExample == 1){
+							cout << line << "\n";	
+						}else{ 
+							ReadFromTheMainListForTheExample.close();
+							break;
+						}
+					}
+						
+					if(watcher != "OP_Finish"){
+						
+						getline(cin, watcher); 
+						memory = watcher; 
+						while((pos = memory.find(delim)) !=  std::string::npos){
+							token1 = memory.substr(0, pos);
+							counterForChecking++;
+							memory.erase(0, pos + delim.length());
+							
+						}	
+						
+						if(counterForChecking == 11){
+							ofstream AddToTheMainList;
+							AddToTheMainList.open("MainList.txt", std::ios::app);
+							AddToTheMainList << watcher << "\n";
+							AddToTheMainList.close();
+						}else if(watcher != "OP_Finish"){
+							cout << "There is not enough columns in the line, please print the line with correct number of columns(12)\n";
+						}
+						
+						
+					}
+				}
+				
+			}
+			
+			if(guide == "ShowMainListByCategories"){
+				string watcher;
+				string viewer;
+				
+				while(watcher != "OP_Finish"){
+					cout << "Please print the number from 1 to 3 to see the list sorted by categories, where 1 = resting, 2 = baggage, 3 = shopping or print OP_Finish to finish this operation:\n";
+					cin >> watcher;
+					
+					int countOfLines = 0;
+					string line, memory, delim = " ", token1, token2;
+					fstream ReadFromTheMainList("MainList.txt");
+					
+					if(watcher == "1"){
+						viewer = "resting";
+					}else if(watcher == "2"){
+						viewer = "baggage";
+					}else if(watcher == "3"){
+						viewer = "shopping";
+					}else if(watcher != "OP_Finish"){
+						cout << "There is no categories with number like " << watcher << "\n";
+					}
+					
+					
+					if(watcher == "1" || watcher == "2" || watcher == "3"){
+						string line, memory, delim = " ", token1;
+						int countOfLines = 0;
+						fstream ReadFromTheMainListForTital("MainList.txt");
+						while(getline(ReadFromTheMainListForTital, line)){
+							size_t pos = 0;
+							int counter = 0; 
+							countOfLines++;
+							
+							if(countOfLines <= 2){
+								cout << "|";
+						
+								while((pos = line.find(delim)) != std::string::npos){
+									counter++;
+									token1 = line.substr(0, pos);
+								
+									cout << token1;
+									if(counter == 4 || counter == 5){
+										int lengthForTheCMD = 7 - token1.length();
+										for(int i = 0; i<lengthForTheCMD-1; i++){
+											if(countOfLines !=2){
+											cout << " ";
+											}else{
+												cout << "-";
+											}
+										}
+										cout << "|";
+									}else{
+										int lengthForTheCMD = 16 - token1.length();
+										for(int i = 0; i<lengthForTheCMD-1; i++){
+											if(countOfLines !=2){
+												cout << " ";
+											}else{
+												cout << "-";
+											}
+										}
+										cout << "|";
+									}
+						
+									line.erase(0, pos + delim.length());
+							
+									if(counter == 11 && countOfLines > 1){
+										cout << line << "|";
+									}else if(counter == 11){
+										cout << line << "    |";
+									}
+								}
+								cout << "\n";
+							}
+						}
+				
+						ReadFromTheMainListForTital.close();
+						
+						while(getline(ReadFromTheMainList, line)){
+						size_t pos = 0;
+						int counter = 0; 
+						int counterForMemorized = 0; 
+						countOfLines++;
+						string lineMemorizer = line;
+						
+						while((pos = line.find(delim)) != std::string::npos){
+							token1 = line.substr(0, pos);
+							counter++;
+
+							if(token1 == viewer && counter == 10){
+								while((pos = lineMemorizer.find(delim)) != std::string::npos){
+									token2 = lineMemorizer.substr(0, pos);
+									counterForMemorized++;
+								
+									if(counterForMemorized == 1){
+										cout << "|";
+									}
+								
+									cout << token2;
+									if(counterForMemorized == 4 || counterForMemorized == 5){
+										int lengthForTheCMD = 7 - token2.length();
+										for(int i = 0; i<lengthForTheCMD-1; i++){
+											if(countOfLines !=2){
+												cout << " ";
+											}else{
+												cout << "-";
+											}
+										}
+										cout << "|";
+									}else{
+									int lengthForTheCMD = 16 - token2.length();
+									for(int i = 0; i<lengthForTheCMD-1; i++){
+										if(countOfLines !=2){
+											cout << " ";
+										}else{
+											cout << "-";
+										}
+									}
+									cout << "|";
+									}
+									lineMemorizer.erase(0, pos + delim.length());
+									if(counterForMemorized == 11 && countOfLines > 1){
+										cout << lineMemorizer << "|";
+									}else if(counterForMemorized == 11){
+										cout << lineMemorizer << "    |";
+									}
+								
+								}
+								cout << "\n";
+							}
+							
+						line.erase(0, pos + delim.length());
+						}
+						
+					
+					}
+					cout << endl;
+					
+					}
+					
+					ReadFromTheMainList.close();
+				}
+			}
+		
+		
+			if(guide == "ShowTouristsStayTimeAndCategory"){
+				string watcher, watcherForTheCategory, scanForCategorizer, categorizer;
+				cout << "Please enter the time that you want to see tourists that was in country.\nExample: 29.09.2023\n";
+				cin >> watcher;
+				string watcherMemorizer = watcher, delimForScanned = ".", token1, line, memory, delim = " ", token2, token3;
+				size_t pos = 0;
+				int counterForSplittingTime = 0, day = 0, month = 0, year = 0, amountOfTourists = 0;;
+				stringstream ss, aa, qq; 
+					
+				while((pos = watcherMemorizer.find(delimForScanned)) != std::string::npos){
+					token1 = watcherMemorizer.substr(0, pos);
+					watcherMemorizer.erase(0, pos + delimForScanned.length());	
+					counterForSplittingTime++;
+					
+						switch(counterForSplittingTime) {
+							case 1: 
+ 								ss << token1;  
+  								ss >> day; 
+								continue;
+							case 2:
+								aa << token1;  
+  								aa >> month; 
+								qq << watcherMemorizer;  
+  								qq >> year; 
+  								continue;
+  							default:
+							  continue;	
+						}		
+							
+				}
+				
+				cout <<  "Do you want to see not only the count of tourists that were in the entered time in the country but the count that is also sorted by categories? (y/n)\n";
+				cin >> watcherForTheCategory; 
+				if(watcherForTheCategory == "y"){
+					cout << "Please print the number from 1 to 3 to see the list sorted by categories, where 1 = resting, 2 = baggage, 3 = shopping:\n";
+					cin >> scanForCategorizer;
+						
+					if(scanForCategorizer == "1"){
+						categorizer = "resting";
+					}else if(scanForCategorizer == "2"){
+						categorizer = "baggage";
+					}else if(scanForCategorizer == "3"){
+						categorizer = "shopping";
+				
+					}else{
+						cout << "There is no categories like " << scanForCategorizer << "\n";
+					}
+					
+					if(scanForCategorizer == "1" || scanForCategorizer == "2" || scanForCategorizer == "3"){
+						
+						fstream ReadFromTheMainList("MainList.txt");
+						while(getline(ReadFromTheMainList, line)){
+							size_t pos = 0;
+							int counter = 0, counterForArrived = 0, dayForArrived = 0, monthForArrived = 0, yearForArrived = 0, dayForDeparted = 0, monthForDeparted = 0, yearForDeparted = 0, counterForCategory = 0; 
+							string lineForArrived = line, lineForCategory = line, tokenForCategory;
+							
+							while((pos = lineForArrived.find(delim)) != std::string::npos){
+								counterForArrived++;
+								token2 = lineForArrived.substr(0, pos);
+								lineForArrived.erase(0, pos + delim.length());
+								stringstream dr, mr, yr, dd, md, yd; 
+								
+								if(counterForArrived == 11){
+									counterForSplittingTime = 0;
+									while((pos = token2.find(delimForScanned)) != std::string::npos){
+										token3 = token2.substr(0, pos);
+										token2.erase(0, pos + delimForScanned.length());	
+										counterForSplittingTime++;
+							
+										switch(counterForSplittingTime) {
+											case 1: 
+		 										dr<< token3;  
+		  										dr >> dayForArrived; 
+												continue;
+											case 2:
+												mr << token3;  
+		  										mr >> monthForArrived; 
+												yr << token2;  
+		  										yr >> yearForArrived; 
+		  										continue;
+		  									default:
+											  continue;	
+										}						
+									
+									}
+								
+									counterForSplittingTime = 0;
+									while((pos = lineForArrived.find(delimForScanned)) != std::string::npos){
+										token3 = lineForArrived.substr(0, pos);
+										lineForArrived.erase(0, pos + delimForScanned.length());	
+										counterForSplittingTime++;
+							
+										switch(counterForSplittingTime) {
+											case 1: 
+		 										dd<< token3;  
+		  										dd >> dayForDeparted; 
+												continue;
+											case 2:
+												md << token3;  
+		  										md >> monthForDeparted; 
+												yd << token2;  
+		  										yd >> yearForDeparted; 
+		  										continue;
+		  									default:
+											  continue;	
+										}						
+									
+									}
+								}
+							
+							}
+							
+							
+							if(yearForArrived<=year && yearForDeparted>=year){
+								if((monthForArrived==monthForDeparted && monthForDeparted==month && dayForArrived<=day && dayForDeparted>=day) || (monthForArrived!=monthForDeparted && monthForArrived<month && monthForDeparted>month) || (monthForArrived==month && monthForDeparted>month && dayForArrived<=day) || (monthForArrived<month && monthForDeparted==month && dayForDeparted>=day)){
+									int counterForEnter = 0;
+									while((pos = lineForCategory.find(delim)) != std::string::npos){
+										counterForCategory++;
+										tokenForCategory = lineForCategory.substr(0, pos);
+										lineForCategory.erase(0, pos + delim.length());
+										
+										if(tokenForCategory == categorizer && counterForCategory == 10 ){	
+																		
+											counterForEnter++;
+											if(counterForEnter == 1){
+												amountOfTourists++;
+											}
+										
+										}	
+									
+									}
+							}
+							
+							}
+						}
+						
+						ReadFromTheMainList.close();			
+							
+					}
+					
+						
+				}else if(watcherForTheCategory == "n"){
+					fstream ReadFromTheMainList("MainList.txt");
+					while(getline(ReadFromTheMainList, line)){
+						size_t pos = 0;
+						int counter = 0, counterForArrived = 0, dayForArrived = 0, monthForArrived = 0, yearForArrived = 0, dayForDeparted = 0, monthForDeparted = 0, yearForDeparted = 0; 
+						string lineForArrived = line;
+						
+						while((pos = lineForArrived.find(delim)) != std::string::npos){
+							counterForArrived++;
+							token2 = lineForArrived.substr(0, pos);
+							lineForArrived.erase(0, pos + delim.length());
+							stringstream dr, mr, yr, dd, md, yd; 
+							
+							if(counterForArrived == 11){
+								counterForSplittingTime = 0;
+								while((pos = token2.find(delimForScanned)) != std::string::npos){
+									token3 = token2.substr(0, pos);
+									token2.erase(0, pos + delimForScanned.length());	
+									counterForSplittingTime++;
+						
+									switch(counterForSplittingTime) {
+										case 1: 
+	 										dr<< token3;  
+	  										dr >> dayForArrived; 
+											continue;
+										case 2:
+											mr << token3;  
+	  										mr >> monthForArrived; 
+											yr << token2;  
+	  										yr >> yearForArrived; 
+	  										continue;
+	  									default:
+										  continue;	
+									}						
+								
+								}
+							
+								counterForSplittingTime = 0;
+								while((pos = lineForArrived.find(delimForScanned)) != std::string::npos){
+									token3 = lineForArrived.substr(0, pos);
+									lineForArrived.erase(0, pos + delimForScanned.length());	
+									counterForSplittingTime++;
+						
+									switch(counterForSplittingTime) {
+										case 1: 
+	 										dd<< token3;  
+	  										dd >> dayForDeparted; 
+											continue;
+										case 2:
+											md << token3;  
+	  										md >> monthForDeparted; 
+											yd << token2;  
+	  										yd >> yearForDeparted; 
+	  										continue;
+	  									default:
+										  continue;	
+									}						
+								
+								}
+							}
+						
+						}
+						
+						
+						if(yearForArrived<=year && yearForDeparted>=year){
+							if((monthForArrived==monthForDeparted && monthForDeparted==month && dayForArrived<=day && dayForDeparted>=day) || (monthForArrived!=monthForDeparted && monthForArrived<month && monthForDeparted>month) || (monthForArrived==month && monthForDeparted>month && dayForArrived<=day) || (monthForArrived<month && monthForDeparted==month && dayForDeparted>=day)){
+								
+								amountOfTourists++;
+							}
+					
+						}
+					
+					}
+					
+				ReadFromTheMainList.close();			
+						
+					
+				}else{
+					cout << "There is no command like that, please next time enter the \'y\' or \'n\'\n";
+				}
+				cout << "The number of tourists who visited the country, according to your characteristics - " << amountOfTourists << endl;
+				
+			}
+		
+		}			
+
+};
