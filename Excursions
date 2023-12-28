@@ -1,0 +1,808 @@
+#include <iostream>
+#include <fstream>
+#include <string>  
+#include <stdio.h>
+#include <time.h>
+#include <ctime>
+#include <sstream> 
+#include <iomanip>
+
+using namespace std;
+class Excursions{
+	string guide;
+	public:
+		
+		Excursions(string scanned){
+			guide = scanned;
+		}
+		
+		void CreateTouristsList(){
+			ofstream CreateTouristsList("AboutTourists.txt");
+			CreateTouristsList << "surname name patronymic category visits arrived depart hotels excursions agency baggage_type\n";
+			CreateTouristsList << "------- ---- ---------- -------- ------ ------- ------ ------ ---------- ------ ------------\n";
+			CreateTouristsList << "Zelenyi Oleh Olexiyovych resting 2 25.06.2022 30.06.2022 Olrah ParisFromTheSky SkyTour private\n";
+			CreateTouristsList << "Opard Taras Tarasovych baggage 1 25.01.2023 28.08.2023 Gerdur none none registered\n";
+			CreateTouristsList << "Salaka Marija Leonidivna shopping 3 17.05.2019 30.06.2019 Ledogual FrancesClothesBrands_DevicesTour TopShopsTours carry-on\n";
+			CreateTouristsList << "Zelena Olena Myhailivna resting 1 25.06.2022 30.06.2022 Olrah ParisFromTheSky SkyTour private\n";
+			CreateTouristsList << "Terdalkin Serafym Mykolaiovych baggage 3 17.05.2019 30.06.2019 Ledogual none none registered\n";
+			CreateTouristsList << "Dubois Sophie Marie baggage 3 14.09.2023 17.09.2023 Sofitel none none registered\n";
+			CreateTouristsList << "Martin Nicolas Pierre resting 5 18.06.2024 30.06.2024 Gerdur NiceBeachRelaxation Cote_dAzur private\n";
+			CreateTouristsList << "Lefevre Jean Paul baggage 2 08.04.2023 10.04.2023 Gerdur none none carry-on\n";
+			CreateTouristsList << "Blanchard Sylvie Paul shopping 3 17.03.2023 20.07.2023 Olrah ParisFashionDistrict_Galeries Lafayette registered\n";
+			CreateTouristsList << "Moreau Julien Adventurer resting 4 05.09.2022 09.09.2023 Ledogual BiarritzSurfing BiaritzTourism carry-on\n";
+			CreateTouristsList << "Dupont Alice Olehivna baggage 1 07.10.2022 10.10.2022 Gerdur none none registered\n";
+			CreateTouristsList << "Bernard Jacques Leonidovych resting 2 12.02.2024 16.02.2024 Gerdur ParisFromTheSky SkyTour private\n";
+			CreateTouristsList << "Martin Sandrine Gotland shopping 3 23.03.2023 26.06.2023 Sofitel ParisFashionDistrict_Galeries Lafayette checked\n";
+			CreateTouristsList << "Rousseau Laurent Herman baggage 1 05.09.2022 07.09.2022 Olrah none none carry-on\n";
+			CreateTouristsList << "Girard Isabelle Koled resting 4 08.04.2024 12.04.2024 Ledogual ParisFromTheSky SkyTour registered\n";
+			CreateTouristsList << "Dubois Olivier Yanta shopping 2 15.05.2023 18.11.2023 Ledogual FrancesClothesBrands_DevicesTour TopShopsTour carry-on\n";
+			CreateTouristsList << "Leclercq Nathalie Jokara resting 3 30.08.2022 02.09.2022 Sofitel ParisFromTheSky SkyTour private\n";
+			CreateTouristsList << "Lem Gui Has shopping 1 21.07.2012 24.08.2023 Sofitel Paris ChicShopsTours carry-on\n";
+			CreateTouristsList << "Komanve Guillaum Naselate shopping 1 18.03.2023 24.12.2023 Sofitel Paris ChicShopsTours carry-on\n";	
+			CreateTouristsList << "Lymanskiy Reme Hasanturis resting 1 18.01.2023 24.07.2025 Sofitel NiceBeachRelaxation Cote_dAzur carry-on\n";	
+			CreateTouristsList << "Depora Zachar Jordanovych shopping 1 21.07.2023 24.07.2023 Sofitel Paris ChicShopsTours carry-on\n";
+			CreateTouristsList << "Depo Olexandr Serhiiovych shopping 4 20.07.2023 24.08.2023 Sofitel Paris ChicShopsTours carry-on\n";		
+			CreateTouristsList << "Opleard Taraser Tarasovych baggage 1 31.01.2023 28.08.2023 Gerdur none none registered\n";
+			CreateTouristsList << "Ipichock Anatolii Eugenovych resting 1 25.01.2023 13.10.2023 Gerdur none none registered\n";
+			CreateTouristsList << "Perdalkin Olexandr Mykolaiovych baggage 3 07.05.2023 30.06.2023 Ledogual none none registered\n";
+			CreateTouristsList << "Rerdalkov Serafym Tarasovych shopping 3 17.10.2019 13.08.2029 Ledogual FrancesClothesBrands_DevicesTour TopShopsTour registered\n";
+			CreateTouristsList << "Tolda Ioan Mykolaiovych baggage 3 17.05.2019 30.06.2024 Ledogual none none registered\n";
+			CreateTouristsList << "Kokoshka Serafym Mykolaiovych baggage 3 17.05.2010 18.09.2027 Ledogual none none registered\n";
+			CreateTouristsList << "Terdalkin Serafym Romanovych baggage 3 17.05.2019 30.06.2037 Ledogual none none registered\n";
+			CreateTouristsList << "Balanar Syl Serhiiovych shopping 3 17.03.2023 20.07.2023 Olrah ParisFashionDistrict_Galeries Lafayette registered\n";
+			CreateTouristsList << "Qalancha Sylvia Restor resting 3 17.03.2023 20.07.2023 Olrah ParisFromTheSky SkyTour registered\n";
+			CreateTouristsList << "Borsch Adam Paulenov shopping 3 17.03.2023 20.07.2023 Olrah ParisFashionDistrict_Galeries Lafayette registered\n";
+			CreateTouristsList.close();
+		}
+		
+		void ShowTheTouristFromTheList(){
+			string line, memory, delim = " ", token1, name, surname, patronymic, lineMemorizer, nameFromList, surnameFromList, patronymicFromList;
+			int countOfLines = 0, flag = 0;
+			size_t pos = 0;
+			int counterForSearch = 0;
+			
+			cout << "Please enter the initials of the tourist you want to see information about:\n";
+			cin >> surname >> name >> patronymic;
+			
+			fstream ReadFromTheTouristsList("AboutTourists.txt");
+			while(getline(ReadFromTheTouristsList, line)){
+				int counter = 0; 
+				countOfLines++;
+				lineMemorizer = line;
+				
+				while((pos = lineMemorizer.find(delim)) != std::string::npos){
+					counter++;
+					token1 = lineMemorizer.substr(0, pos);
+					lineMemorizer.erase(0, pos + delim.length());
+					
+					if(counter == 1){
+						surnameFromList = token1;
+					}else if(counter == 2){
+						nameFromList = token1;
+					}else if(counter == 3){
+						patronymicFromList = token1;
+					}else{
+						break;
+					}
+				}
+				
+				counter = 0;
+			
+				
+				if(surnameFromList == surname && nameFromList == name && patronymicFromList == patronymic){		
+					flag = 1;
+					cout << "|surname        |name           |patronymic     |category|visits|arrived    |depart     |hotels     |excursions                      |agency         |baggage_type|\n";
+					cout << "|---------------|---------------|---------------|--------|------|-----------|-----------|-----------|--------------------------------|---------------|------------|\n";
+					cout << "|";
+					while((pos = line.find(delim)) != std::string::npos){
+						counter++;
+						token1 = line.substr(0, pos);
+						cout << token1;
+						
+						if(counter == 4){
+							int lengthForTheCMD = 9 - token1.length();
+								for(int i = 0; i<lengthForTheCMD-1; i++){
+									if(countOfLines !=2){
+										cout << " ";
+									}else{
+										cout << "-";
+									}
+								}
+								cout << "|";
+						
+						}else if(counter == 6 || counter == 7 || counter == 8){
+							int lengthForTheCMD = 12 - token1.length();
+								for(int i = 0; i<lengthForTheCMD-1; i++){
+									if(countOfLines !=2){
+										cout << " ";
+									}else{
+										cout << "-";
+									}
+								}
+								cout << "|";
+						
+						}else if(counter == 5){
+							int lengthForTheCMD = 7 - token1.length();
+								for(int i = 0; i<lengthForTheCMD-1; i++){
+									if(countOfLines !=2){
+										cout << " ";
+									}else{
+										cout << "-";
+									}
+								}
+								cout << "|";
+						
+						}else if(counter == 9){
+							int lengthForTheCMD = 33 - token1.length();
+							for(int i = 0; i<lengthForTheCMD-1; i++){
+								if(countOfLines !=2){
+									cout << " ";
+								}else{
+									cout << "-";
+								}
+							}
+							cout << "|";
+						}else{
+							int lengthForTheCMD = 16 - token1.length();
+							for(int i = 0; i<lengthForTheCMD-1; i++){
+								if(countOfLines !=2){
+									cout << " ";
+								}else{
+									cout << "-";
+								}
+							}
+							cout << "|";
+						}
+						
+						line.erase(0, pos + delim.length());
+						
+						if(counter == 10){
+							cout << line;
+							int lengthForTheCMD = 13 - line.length();
+							for(int i = 0; i<lengthForTheCMD-1; i++){
+								if(countOfLines !=2){
+									cout << " ";
+								}else{
+									cout << "-";
+								}
+							}
+							cout << "|";
+						}
+					}
+					cout << "\n";
+					
+				}
+				
+			}
+			
+			ReadFromTheTouristsList.close();	
+			if(flag == 0){
+				cout << "There is no tourists like " << surname << " " << name << " " << patronymic << endl;
+			}
+			
+			flag = 0;
+		}
+		
+		
+		void ListOfHotels(){
+			string HotelOlrah = "Olrah", HotelGerdur = "Gerdur", HotelLedogual = "Ledogual", HotelSofitel = "Sofitel";
+		     time_t now = time(0);
+		     struct tm tstruct;     
+			 char yearC[5], monthC[3], dayC[3];  
+			 tstruct = *localtime(&now);  // convert time_t value to a local time struct
+			 strftime(yearC, sizeof(yearC), "%Y", &tstruct);  // format year as string and store in buffer
+			 strftime(monthC, sizeof(monthC), "%m", &tstruct);  
+			 strftime(dayC, sizeof(dayC), "%d", &tstruct);  
+		   	 stringstream ss, aa, qq; 
+			
+			 int day, month, year;
+			 ss << dayC;
+			 ss >> day;
+			 aa << yearC;
+			 aa >> year;
+			 qq << monthC;
+			 qq >> month;
+			 
+			 
+			 cout << "Year: " << year << endl;  
+			 cout << "Month: " << month << endl;  
+			 cout << "Day: " << day << endl;
+			 
+			   				
+				fstream ReadFromTheTouristsList("AboutTourists.txt");
+				
+				string token1, line, memory, delim = " ", token2, token3, delimForSplittingDate = ".";
+				size_t pos = 0;
+				int counterForSplittingTime = 0, amountOfTourists = 0, counterForLedogual = 0, counterForOlrah = 0, counterForSoftiel = 0, counterForGerdur = 0;
+				
+				while(getline(ReadFromTheTouristsList, line)){
+				size_t pos = 0;
+				int counter = 0, counterForArrived = 0, dayForArrived = 0, monthForArrived = 0, yearForArrived = 0, dayForDeparted = 0, monthForDeparted = 0, yearForDeparted = 0; 
+				string lineForArrived = line;
+				
+				while((pos = lineForArrived.find(delim)) != std::string::npos){
+					
+					counterForArrived++;
+					token2 = lineForArrived.substr(0, pos);
+					lineForArrived.erase(0, pos + delim.length());
+					stringstream dr, mr, yr, dd, md, yd; 
+					
+					if(counterForArrived == 6){
+						counterForSplittingTime = 0;
+
+						while((pos = token2.find(delimForSplittingDate)) != std::string::npos){
+							token3 = token2.substr(0, pos);
+							token2.erase(0, pos + delimForSplittingDate.length());	
+							counterForSplittingTime++;
+				
+							switch(counterForSplittingTime) {
+								case 1: 
+									dd << token3;  
+									dd >> dayForArrived; 
+									continue;
+								case 2:
+									md << token3;  
+									md >> monthForArrived; 
+									yd << token2;  
+									yd >> yearForArrived; 
+									continue;
+								default:
+								  continue;	
+							}						
+						
+						}
+					}
+					
+					
+					if(counterForArrived==7){
+						counterForSplittingTime = 0;
+						while((pos = token2.find(delimForSplittingDate)) != std::string::npos){
+							token3 = token2.substr(0, pos);
+							token2.erase(0, pos + delimForSplittingDate.length());	
+							counterForSplittingTime++;
+				
+							switch(counterForSplittingTime) {
+								case 1: 
+									dd<< token3;  
+									dd >> dayForDeparted; 
+									continue;
+								case 2:
+									md << token3;  
+									md >> monthForDeparted; 
+									yd << token2;  
+									yd >> yearForDeparted; 
+									continue;
+								default:
+								  continue;	
+							}						
+						
+						}
+					}
+				
+				}
+				
+				if(yearForArrived<=year && yearForDeparted>=year){
+					if((monthForArrived==monthForDeparted && monthForDeparted==month && dayForArrived<=day && dayForDeparted>=day) || (monthForArrived!=monthForDeparted && monthForArrived<month && monthForDeparted>month) || (monthForArrived==month && monthForDeparted>month && dayForArrived<=day) || (monthForArrived<month && monthForDeparted==month && dayForDeparted>=day) || (yearForArrived!=yearForDeparted)){
+						
+						while((pos = line.find(delim)) != std::string::npos){
+
+							counter++;
+							token1 = line.substr(0, pos);
+							line.erase(0, pos + delim.length());
+							
+							if(token1 == HotelGerdur){
+								counterForGerdur++;
+							}else if(token1 == HotelLedogual){
+								counterForLedogual++;
+							}else if(token1 == HotelOlrah){
+								counterForOlrah++;
+							}else if(token1 == HotelSofitel){
+								counterForSoftiel++;
+							}
+						}
+					
+					
+					}
+				}
+			
+				}
+				
+			ReadFromTheTouristsList.close();			
+			cout << "\n|Hotel:   |occupied rooms:\n"; 
+			cout << "|---------|---------------\n";
+			cout << "|" << HotelOlrah << "    |" << counterForOlrah << endl;
+			cout << "|" << HotelGerdur << "   |" << counterForGerdur << endl; 
+			cout << "|" << HotelSofitel << "  |" << counterForSoftiel << endl; 			 			
+			cout << "|" << HotelLedogual << " |" << counterForLedogual << endl; 
+						  	
+			cout << "Do you want to see weather a person lived in one of this hotels in the entered time?(y/n)\n";
+			string checker;
+			cin >> checker;
+			
+			if(checker == "y"){
+				string name, surname, patronymic, date;
+				cout << "Please enter the initials of tourist, that you want to see information about(Example: surname name patronymic):\n";
+				cin >> surname >> name >> patronymic;
+				cout << "Please enter the year, that you want to see weather the torist lived in a hotel in that time:\n"; // треба запитати Шекету
+				cin >> date;
+				string lineForTourist, delim = " ", delimForYear = ".", tokenForTourist1, tokenForTourist2;
+				fstream ReadFromTheTouristsListForTourist("AboutTourists.txt");
+				int  yearForArrived2 = 0,  yearForDeparted2 = 0, counterForSplittingTime = 0, counterForAll = 0, yearDate, flag = 0;
+				int flagForSur = 0, flagForName = 0, flagForPatr = 0;
+				stringstream yud;
+				yud << date;
+				yud >> yearDate;
+				
+				while(getline(ReadFromTheTouristsListForTourist, lineForTourist)){
+					string lineMemory = lineForTourist;
+					size_t pos = 0;
+					counterForAll = 0;
+					
+					while((pos = lineForTourist.find(delim)) != std::string::npos){
+						tokenForTourist1 = lineForTourist.substr(0, pos);
+						lineForTourist.erase(0, pos + delim.length()); 
+						counterForAll++;
+						stringstream yr, yd;
+						
+						if(counterForAll == 6){
+							counterForSplittingTime = 0;
+	
+							while((pos = tokenForTourist1.find(delimForYear)) != std::string::npos){
+								tokenForTourist2 = tokenForTourist1.substr(0, pos);
+								tokenForTourist1.erase(0, pos + delimForYear.length());	
+								counterForSplittingTime++;
+					
+								if(counterForSplittingTime == 2){
+									yr << tokenForTourist1;
+									yr >> yearForArrived2;
+								}			
+							
+							}
+						}
+						
+						if(counterForAll == 7){
+							counterForSplittingTime = 0;
+	
+							while((pos = tokenForTourist1.find(delimForYear)) != std::string::npos){
+								tokenForTourist2 = tokenForTourist1.substr(0, pos);
+								tokenForTourist1.erase(0, pos + delimForYear.length());	
+								counterForSplittingTime++;
+					
+								if(counterForSplittingTime == 2){
+									yd << tokenForTourist1;
+									yd >> yearForDeparted2;
+								}			
+							
+							}
+						}
+						
+						
+						if(counterForAll == 1 && tokenForTourist1 == surname){
+							flagForSur = 1;
+						}else if(counterForAll == 1 && tokenForTourist1 != surname){
+							flagForSur = 0;
+						}
+						
+						if(counterForAll == 2 && tokenForTourist1 == name){
+							flagForName = 1;
+						}else if(counterForAll == 2 && tokenForTourist1 != name){
+							flagForName = 0;
+						}
+						
+						if(counterForAll == 3 && tokenForTourist1 == patronymic){
+							flagForPatr = 1;
+						}else if(counterForAll == 3 && tokenForTourist1 != patronymic){
+							flagForPatr = 0;
+						}
+						
+					}
+					
+					
+					if(flagForSur == 1 && flagForName == 1 && flagForPatr == 1){
+						if(yearDate>=yearForArrived2 && yearDate<=yearForDeparted2){
+							int counter = 0, countOfLines = 0;
+						
+							flag = 1;
+							cout << "|surname        |name           |patronymic     |category|visits|arrived    |depart     |hotels     |excursions                      |agency         |baggage_type|\n";
+							cout << "|---------------|---------------|---------------|--------|------|-----------|-----------|-----------|--------------------------------|---------------|------------|\n";
+							cout << "|";
+							while((pos = lineMemory.find(delim)) != std::string::npos){
+								counter++;
+								token1 = lineMemory.substr(0, pos);
+								cout << token1;
+								
+								if(counter == 4){
+									int lengthForTheCMD = 9 - token1.length();
+										for(int i = 0; i<lengthForTheCMD-1; i++){
+											if(countOfLines !=2){
+												cout << " ";
+											}else{
+												cout << "-";
+											}
+										}
+										cout << "|";
+								
+								}else if(counter == 6 || counter == 7 || counter == 8){
+									int lengthForTheCMD = 12 - token1.length();
+										for(int i = 0; i<lengthForTheCMD-1; i++){
+											if(countOfLines !=2){
+												cout << " ";
+											}else{
+												cout << "-";
+											}
+										}
+										cout << "|";
+								
+								}else if(counter == 5){
+									int lengthForTheCMD = 7 - token1.length();
+										for(int i = 0; i<lengthForTheCMD-1; i++){
+											if(countOfLines !=2){
+												cout << " ";
+											}else{
+												cout << "-";
+											}
+										}
+										cout << "|";
+								
+								}else if(counter == 9){
+									int lengthForTheCMD = 33 - token1.length();
+									for(int i = 0; i<lengthForTheCMD-1; i++){
+										if(countOfLines !=2){
+											cout << " ";
+										}else{
+											cout << "-";
+										}
+									}
+									cout << "|";
+								}else{
+									int lengthForTheCMD = 16 - token1.length();
+									for(int i = 0; i<lengthForTheCMD-1; i++){
+										if(countOfLines !=2){
+											cout << " ";
+										}else{
+											cout << "-";
+										}
+									}
+									cout << "|";
+								}
+								
+								lineMemory.erase(0, pos + delim.length());
+								
+								if(counter == 10){
+									cout << lineMemory;
+									int lengthForTheCMD = 13 - lineMemory.length();
+									for(int i = 0; i<lengthForTheCMD-1; i++){
+										if(countOfLines !=2){
+											cout << " ";
+										}else{
+											cout << "-";
+										}
+									}
+									cout << "|";
+								}
+							}
+							cout << "\n";
+							
+						}
+					}
+					
+						
+				}
+					
+			if(flag == 0){
+				cout << surname << " " << name << " " << patronymic << " does not lived in France's hotels in " << date << endl;
+			}
+				
+			}else if(checker != "n"){
+				cout << "There is no answer like - " << checker << endl;
+			}				
+				   				
+				   				
+		}
+		
+		
+		void CountOFTouristsThatBorovedExursion(){
+			int period, countOFTourists = 0;
+			cout << "Please enter the year to see the count of tourists that borrowed excursions in that time:\n";
+			cin >> period;
+			
+			string line, delim = " ", delimForYear = ".", token1, token2, memory;
+			
+			fstream ReadFromTheTouristsList("AboutTourists.txt");
+			
+			while(getline(ReadFromTheTouristsList, line)){
+				size_t pos = 0;
+				
+				int counter = 0, counterForArrived = 0,  yearForArrived = 0, yearForDeparted = 0, counterForSplittingTime = 0, flagForCategory = 0; 
+				string lineForArrived = line;
+				
+				while((pos = lineForArrived.find(delim)) != std::string::npos){
+					
+					counterForArrived++;
+					token1 = lineForArrived.substr(0, pos);
+					lineForArrived.erase(0, pos + delim.length());
+					stringstream yr, dd, md, yd; 
+					
+					if(counterForArrived == 6){
+						counterForSplittingTime = 0;
+
+						while((pos = token1.find(delimForYear)) != std::string::npos){
+							token2 = token1.substr(0, pos);
+							token1.erase(0, pos + delimForYear.length());	
+							counterForSplittingTime++;
+				
+							if(counterForSplittingTime == 2){
+								yr << token1;
+								yr >> yearForArrived;
+							}			
+						
+						}
+					}
+					
+					
+					if(counterForArrived == 7){
+						counterForSplittingTime = 0;
+						
+						while((pos = token1.find(delimForYear)) != std::string::npos){
+							token2 = token1.substr(0, pos);
+							token1.erase(0, pos + delimForYear.length());	
+							counterForSplittingTime++;
+				
+							if(counterForSplittingTime == 2){
+								yr << token1;
+								yr >> yearForDeparted;
+							}					
+						
+						}
+					}
+					
+					if(counterForArrived == 9 && token1!="none"){
+						if(period<=yearForDeparted && period>=yearForArrived){
+							countOFTourists++;
+								
+						}
+					}
+				
+				}
+				
+			}
+			cout << "The number of tourists, that borrowed excursion in that time = " << countOFTourists << endl;
+			
+		}
+		
+		
+		void TheMostPopExcursAndAgency(){
+			string exParisFromTheSky = "ParisFromTheSky", exFrancesClothesBrands_DevicesTour = "FrancesClothesBrands_DevicesTour", exNiceBeachRelaxation = "NiceBeachRelaxation", exParisFashionDistrict_Galeries = "ParisFashionDistrict_Galeries", exBiarritzSurfing = "BiarritzSurfing", exParis = "Paris";
+			string agSkyTour = "SkyTour", agTopShopsTours = "TopShopsTours", agCote_dAzur = "Cote_dAzur", agLafayette = "Lafayette", agChicShopsTours = "ChicShopsTours", agBiaritzTourism = "BiaritzTourism";
+			int counterForExPFTS = 0, counterForExFCBDT = 0, counterForExNBR = 0, counterForExPFDG = 0, counterForExBS = 0, counterForExP = 0;
+			int counterForAgST = 0, counterForAgTST = 0, counterForAgCdA = 0, counterForAgL = 0, counterForAgCST = 0, counterForAgBT = 0;
+			int counter = 0;
+			string token1, line, delim = " ";
+			fstream ReadFromTheTouristsList("AboutTourists.txt");
+			
+			while(getline(ReadFromTheTouristsList, line)){
+				size_t pos = 0;
+				while((pos = line.find(delim))!=std::string::npos){
+					token1 = line.substr(0, pos);
+					counter++;
+					line.erase(0, pos + delim.length());
+					
+					if(counter == 9){
+						if(token1 == exParisFromTheSky){
+							counterForExPFTS++;
+						}else if(token1 == exFrancesClothesBrands_DevicesTour){
+							counterForExFCBDT++;
+						}else if(token1 == exNiceBeachRelaxation){
+							counterForExNBR++;
+						}else if(token1 == exParisFashionDistrict_Galeries){
+							counterForExPFDG++;
+						}else if(token1 == exBiarritzSurfing){
+							counterForExBS++;
+						}else if(token1 == exParis){
+							counterForExP++;
+						}
+					}
+					
+					if(counter == 10){
+						if(token1 == agSkyTour){
+							counterForAgST++;
+						}else if(token1 == agTopShopsTours){
+							counterForAgTST++;
+						}else if(token1 == agCote_dAzur){
+							counterForAgCdA++;
+						}else if(token1 == agLafayette){
+							counterForAgL++;
+						}else if(token1 == agChicShopsTours){
+							counterForAgCST++;
+						}else if(token1 == agBiaritzTourism){
+							counterForAgBT++;
+						}
+					}
+					
+				}
+				counter = 0;
+			}
+			
+			if(counterForExPFTS>counterForExFCBDT && counterForExPFTS>counterForExNBR && counterForExPFTS>counterForExBS && counterForExPFTS>counterForExP && counterForExPFTS>counterForExPFDG){
+				cout << "The most popular excursion is - " << exParisFromTheSky << endl;
+			}else if(counterForExFCBDT>counterForExPFTS && counterForExFCBDT>counterForExNBR && counterForExFCBDT>counterForExPFDG && counterForExFCBDT>counterForExBS && counterForExFCBDT>counterForExP){
+				cout << "The most popular excursion is - " << exFrancesClothesBrands_DevicesTour << endl;
+			}else if(counterForExNBR>counterForExFCBDT && counterForExNBR>counterForExPFTS && counterForExNBR>counterForExPFDG && counterForExNBR>counterForExBS && counterForExNBR>counterForExP){
+				cout << "The most popular excursion is - " << exNiceBeachRelaxation << endl;
+			}else if(counterForExPFDG>counterForExNBR && counterForExPFDG>counterForExFCBDT && counterForExPFDG>counterForExPFTS && counterForExPFDG>counterForExBS && counterForExPFDG>counterForExP){
+				cout << "The most popular excursion is - " << exParisFashionDistrict_Galeries << endl;
+			}else if(counterForExBS>counterForExP && counterForExBS>counterForExPFDG && counterForExBS>counterForExNBR && counterForExBS>counterForExFCBDT && counterForExBS>counterForExPFTS){
+				cout << "The most popular excursion is - " << exBiarritzSurfing << endl;
+			}else if(counterForExP>counterForExBS && counterForExP>counterForExPFDG && counterForExP>counterForExNBR && counterForExP>counterForExFCBDT && counterForExP>counterForExPFTS){
+				cout << "The most popular excursion is - " << exParis << endl;
+			}else{
+				cout << "There is no the most popular excursion!\n";
+			}
+			
+			
+			if(counterForAgST>counterForAgTST && counterForAgST>counterForAgCdA && counterForAgST>counterForAgL && counterForAgST>counterForAgCST && counterForAgST>counterForAgBT){
+				cout << "The best quality excursion agency is - " << agSkyTour << endl;
+			}else if(counterForAgTST>counterForAgST && counterForAgTST>counterForAgCdA && counterForAgTST>counterForAgL && counterForAgTST>counterForAgCST && counterForAgTST>counterForAgBT){
+				cout << "The best quality excursion agency is - " << agTopShopsTours << endl;
+			}else if(counterForAgCdA>counterForAgST && counterForAgCdA>counterForAgTST && counterForAgCdA>counterForAgL && counterForAgCdA>counterForAgCST && counterForAgCdA>counterForAgBT){
+				cout << "The best quality excursion agency is - " << agCote_dAzur << endl;
+			}else if(counterForAgL>counterForAgST && counterForAgL>counterForAgTST && counterForAgL>counterForAgCdA && counterForAgL>counterForAgCST && counterForAgL>counterForAgBT){
+				cout << "The best quality excursion agency is - " << agLafayette << endl;
+			}else if(counterForAgCST>counterForAgST && counterForAgCST>counterForAgTST && counterForAgCST>counterForAgCdA && counterForAgCST>counterForAgL && counterForAgCST>counterForAgBT){
+				cout << "The best quality excursion agency is - " << agChicShopsTours << endl;
+			}else if(counterForAgBT>counterForAgST && counterForAgBT>counterForAgTST && counterForAgBT>counterForAgCdA && counterForAgBT>counterForAgL && counterForAgBT>counterForAgCST){
+				cout << "The best quality excursion agency is - " << agBiaritzTourism << endl;
+			}else{
+				cout << "There is no the best quality excursion agency!\n";
+			}
+			
+		}
+		
+		void ratioOfRestingAndShoppingTourists(){
+			string scanner, delim = " ", token1, token2, line, lineMemorizer, delimForDate = ".";
+			int countOfLines = 0, counterForShopers = 0, counterForResting = 0;
+			double ratioRestingToShopping = 0;
+			fstream ReadFromTheTouristsList("AboutTourists.txt");
+			cout << "Do you want to see ratio by seasons?(y/n):\n";
+			cin >> scanner;
+			
+			if(scanner == "n"){
+				while(getline(ReadFromTheTouristsList, line)){
+					size_t pos = 0;
+					int counter = 0;
+					while((pos = line.find(delim))!=std::string::npos){
+						token1 = line.substr(0, pos);
+						counter++;
+						line.erase(0, pos + delim.length());
+						
+						if(counter == 4 && token1 == "resting"){
+								counterForResting++;
+						}
+						
+						if(counter == 4 && token1 == "shopping"){
+							counterForShopers++;
+						}
+						
+						
+				
+					}
+				}
+				
+				ratioRestingToShopping = (double)counterForResting/(double)counterForShopers * 100;
+				cout << "Count of resting tourists - " << counterForResting << ";\nCount of shopping tourists - " << counterForShopers << ";\n";
+				cout << "The ratio of resting tourists to shopping tourists in percentage - " << setprecision(3) << ratioRestingToShopping << "%\n";
+				
+				
+			}else if(scanner == "y"){
+				cout << "Please enter the season whose ratio you want to see(1 - winter, 2 - spring, 3 - summer, 4 - outumn):\n";
+				cin >> scanner;
+				if(scanner == "1" || scanner == "2" || scanner == "3" || scanner == "4"){
+					int monthOfArriving = 0, monthOfDeparting = 0, firstMonth = 0, secondMonth = 0, thirdMonthes = 0, restingChecker = 0, shoppingChecker = 0;
+					while(getline(ReadFromTheTouristsList, line)){
+					size_t pos = 0;
+					lineMemorizer = line;
+					int counter = 0;
+					stringstream mar, md;
+						while((pos = line.find(delim))!=std::string::npos){
+							token1 = line.substr(0, pos);
+							counter++;
+							line.erase(0, pos + delim.length());
+							int counterForMonth = 0;
+							size_t pos1 = 0;
+							
+							if(counter == 4 && token1 == "resting"){
+								restingChecker = 1;
+							}else{
+								restingChecker = 0;
+							}
+							
+							if(counter == 4 && token1 == "shopping"){
+								shoppingChecker = 1;
+							}else{
+								shoppingChecker = 0;
+							}	
+							
+							
+							if(counter == 6){
+								while((pos1 = token1.find(delimForDate))!=std::string::npos){
+									token2 = token1.substr(0, pos);
+									counterForMonth++;
+									token1.erase(0, pos1 + delimForDate.length());
+							
+									if(counterForMonth == 2){
+										mar << token2;
+										mar >> monthOfArriving;
+									}
+									
+								}
+								
+							}else if(counter == 7){
+								while((pos1 = token1.find(delimForDate))!=std::string::npos){
+									token2 = token1.substr(0, pos);
+									counterForMonth++;
+									token1.erase(0, pos1 + delimForDate.length());
+							
+									if(counterForMonth == 2){
+										md << token2;
+										md >> monthOfDeparting;
+									}
+									
+								}
+							}
+							
+							
+							if(scanner == "1"){
+								if(monthOfArriving<=12 && monthOfDeparting>=12 || monthOfArriving<=2 && monthOfDeparting>=1 || monthOfArriving<=12 && monthOfDeparting<=2 || monthOfArriving<=1 && monthOfDeparting>=1 || monthOfArriving<=2 && monthOfDeparting>=2 || monthOfDeparting<monthOfArriving && (monthOfArriving>=1 || monthOfDeparting<=2)){
+									if(restingChecker == 1){
+										counterForResting++;
+									}else if(shoppingChecker == 1){
+										counterForShopers++;
+									}	
+								}
+							}else if(scanner == "2"){
+								if(monthOfArriving<=3 && monthOfDeparting>=3 || monthOfArriving<=4 && monthOfDeparting>=4 || monthOfArriving<=5 && monthOfDeparting>=5 || monthOfDeparting<monthOfArriving && (monthOfArriving>=3 || monthOfDeparting<=5)){
+									if(restingChecker == 1){
+										counterForResting++;
+									}else if(shoppingChecker == 1){
+										counterForShopers++;
+									}	
+								}
+							}else if(scanner == "3"){
+								if(monthOfArriving<=6 && monthOfDeparting>=6 || monthOfArriving<=7 && monthOfDeparting>=7 || monthOfArriving<=8 && monthOfDeparting>=8 || monthOfDeparting<monthOfArriving && (monthOfArriving>=6 || monthOfDeparting<=8)){
+									if(restingChecker == 1){
+										counterForResting++;
+									}else if(shoppingChecker == 1){
+										counterForShopers++;
+									}	
+								}
+							}else if(scanner == "4"){
+								if(monthOfArriving<=9 && monthOfDeparting>=9 || monthOfArriving<=10 && monthOfDeparting>=10 || monthOfArriving<=11 && monthOfDeparting>=11 || monthOfDeparting<monthOfArriving && (monthOfArriving>=9 || monthOfDeparting<=11)){
+									if(restingChecker == 1){
+										counterForResting++;
+									}else if(shoppingChecker == 1){
+										counterForShopers++;
+									}	
+								}
+							}
+							
+							
+							
+						}
+						
+					}
+					ratioRestingToShopping = (double)counterForResting/(double)counterForShopers * 100;
+					cout << "Count of resting tourists - " << counterForResting << ";\nCount of shopping tourists - " << counterForShopers << ";\n";
+					cout << "The ratio of resting tourists to shopping tourists in percentage - " << setprecision(3) << ratioRestingToShopping << "%\n";
+					
+				}else{
+					cout << "The " << scanner << " does not correspond to any of the seasons!";
+				}
+				
+			}else{
+				cout << "There is no answer like - " << scanner << endl;
+			}
+		
+		}
+		
+};
+
