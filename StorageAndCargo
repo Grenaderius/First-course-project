@@ -1,0 +1,422 @@
+#include <iostream>
+#include <fstream>
+#include <string> 
+#include <sstream> 
+#include <cmath>
+
+using namespace std;
+class Storage{
+	public:
+		void CreateStorageAndBaggageWithPlanes(){
+			ofstream CreateStorage("Storage.txt");
+			CreateStorage << "25 140 05.2023 2 1 1\n";
+			CreateStorage << "19 112 04.2023 2 0 2\n";
+			CreateStorage << "40 220 03.2023 5 2 3\n";
+			CreateStorage << "52 198 02.2023 8 2 6\n";
+			CreateStorage << "31 35 01.2023 1 0 1\n";
+			CreateStorage << "28 320 12.2022 8 6 2\n";
+			CreateStorage << "72 548 11.2022 15 12 3\n";
+			CreateStorage << "15 25 10.2022 1 0 1\n";
+			CreateStorage << "36 119 09.2022 3 2 1\n";
+			CreateStorage << "47 147 08.2022 8 5 3\n";
+			CreateStorage << "96 487 07.2022 12 8 4\n";
+			CreateStorage << "125 1487 06.2022 21 11 10\n";
+			CreateStorage << "78 985 05.2022 18 8 10\n";
+			CreateStorage << "45 186 04.2022 5 2 3\n";
+			CreateStorage << "156 2146 03.2022 35 21 14\n";
+			CreateStorage << "250 3402 02.2022 47 28 19\n";
+			CreateStorage << "78 932 01.2022 15 3 12\n";
+			CreateStorage << "310 4871 12.2021 47 27 20\n";
+			CreateStorage << "91 1078 11.2021 15 6 9\n";
+			CreateStorage << "205 3015 10.2021 37 17 20\n";
+			CreateStorage << "124 1519 09.2021 20 8 12\n";
+			CreateStorage << "290 4060 08.2021 50 28 22\n";
+			CreateStorage << "156 1976 07.2021 29 12 17\n";
+			CreateStorage << "85 990 06.2021 14 5 9\n";
+			CreateStorage << "198 2685 05.2021 33 16 17\n";
+			CreateStorage << "120 1349 04.2021 19 9 10\n";
+			CreateStorage << "270 3634 03.2021 44 22 22\n";
+			CreateStorage << "183 2150 02.2021 31 13 18\n";
+			CreateStorage << "96 1065 01.2021 16 5 11\n";
+			CreateStorage << "240 3083 12.2020 40 19 21\n";
+			CreateStorage << "146 1650 11.2020 25 10 15\n";
+			CreateStorage << "68 701 10.2020 11 4 7\n";
+			CreateStorage << "180 2104 09.2020 30 12 18\n";
+			CreateStorage << "112 1168 08.2020 18 7 11\n";
+			CreateStorage << "255 2890 07.2020 40 16 24\n";
+			CreateStorage << "137 1393 06.2020 21 7 14\n";
+			CreateStorage << "75 748 05.2020 11 3 8\n";
+			CreateStorage << "220 2456 04.2020 35 12 23\n";
+			CreateStorage << "98 960 03.2020 16 5 11\n";
+			CreateStorage << "190 1990 02.2020 30 8 22\n";
+			CreateStorage << "124 1184 01.2020 18 3 15\n";
+			CreateStorage << "270 2560 12.2019 41 11 30\n";
+			CreateStorage << "156 1440 11.2019 24 6 18\n";
+		}
+		
+		void ShowTheStorageByPeriod(){
+			fstream ReadFromStorage("Storage.txt");
+			string date;
+			
+			cout << "Please enter the date(example - 07.2023):\n";
+			cin >> date;
+			
+			string delim = " ", line, token1, lineMemorizer;
+			int flagForAll = 0;
+			while(getline(ReadFromStorage, line)){
+				lineMemorizer = line;
+				size_t pos = 0;
+				int counter = 0, flagForDate = 0;
+				
+				while((pos = line.find(delim)) != std::string::npos){
+					token1 = line.substr(0, pos);
+					counter++;
+					line.erase(0, pos + delim.length());
+					
+					if(counter == 3 && date == token1){
+						flagForDate = 1;
+					}
+				}
+				
+				if(flagForDate == 1){
+					flagForAll = 1;
+					counter = 0;
+					
+					while((pos = lineMemorizer.find(delim)) != std::string::npos){
+						token1 = lineMemorizer.substr(0, pos);
+						counter++;
+						lineMemorizer.erase(0, pos + delim.length());
+						
+						if(counter == 1){
+							cout << "|-----------------------------------|-------\n";
+							cout << "|Count of occupied places for cargo |" << token1 << endl;
+							cout << "|-----------------------------------|-------\n";
+						}else if(counter == 2){
+							cout << "|Weigth of cargo(kg)                |" << token1 << endl;
+							cout << "|-----------------------------------|-------\n";
+						}else if(counter == 3){
+							cout << "|Period of time                     |" << token1 << endl;
+							cout << "|-----------------------------------|-------\n";
+						}else if(counter == 4){
+							cout << "|Count of all planes                |" << token1 << endl;
+							cout << "|-----------------------------------|-------\n";
+						}else if(counter == 5){
+							cout << "|Count of cargo planes              |" << token1 << endl;
+							cout << "|-----------------------------------|-------\n";
+							cout << "|Count of cargo-passanger planes    |" << lineMemorizer << endl;
+							cout << "|-----------------------------------|-------\n";
+						}
+					}			
+				}
+			}
+			
+			if(flagForAll == 0){
+				cout << "There are no records for period like - " << date << endl;
+			}
+		}
+		
+		
+		void CreateTheCargoList(){
+			ofstream CreateCargoList("CargoList.txt");
+			CreateCargoList << "alive 2.5 16.05.2023\n";
+			CreateCargoList << "valuable 4.5 18.05.2023\n";
+			CreateCargoList << "bulk 8.5 17.04.2023\n";
+			CreateCargoList << "dangerous 2.2 21.03.2023\n";
+			CreateCargoList << "perishable 1.2 19.05.2023\n";
+			CreateCargoList << "alive 3.8 06.05.2023\n";
+			CreateCargoList << "dangerous 2.2 21.05.2023\n";
+			CreateCargoList << "alive 7.5 01.02.2023\n";
+			CreateCargoList << "valuable 12.5 28.02.2023\n";
+			CreateCargoList << "perishable 3.2 10.01.2023\n";
+			CreateCargoList << "perishable 4.8 19.03.2023\n";
+			CreateCargoList << "perishable 5.9 19.08.2022\n";
+			CreateCargoList << "valuable 8.1 09.02.2023\n";
+			CreateCargoList << "alive 8.2 26.12.2022\n";
+			CreateCargoList << "bulk 4.5 10.03.2022\n";
+			CreateCargoList << "valuable 4.5 18.05.2022\n";
+			CreateCargoList << "alive 5.6 15.04.2022\n";
+			CreateCargoList << "bulk 2.3 14.05.2022\n";
+			CreateCargoList << "dangerous 4.5 02.02.2022\n";
+			CreateCargoList << "bulk 8.7 01.09.2023\n";
+			CreateCargoList << "perishable 7.2 14.11.2022\n";
+			CreateCargoList << "perishable 4.6 08.05.2023\n";
+			CreateCargoList << "alive 6 24.06.2022\n";
+			CreateCargoList << "bulk 14.5 10.10.2022\n";
+			CreateCargoList << "bulk 8.5 17.04.2021\n";
+			CreateCargoList << "dangerous 2.2 21.03.2021\n";
+			CreateCargoList << "perishable 1.2 19.05.2021\n";
+			CreateCargoList << "alive 3.8 06.05.2021\n";
+			CreateCargoList << "dangerous 2.2 21.05.2021\n";
+			CreateCargoList << "alive 7.5 01.02.2021\n";
+			CreateCargoList << "valuable 12.5 28.02.2021\n";
+			CreateCargoList << "perishable 3.2 10.01.2021\n";
+			CreateCargoList << "perishable 4.8 19.03.2021\n";
+			CreateCargoList << "perishable 5.9 19.08.2020\n";
+			CreateCargoList << "valuable 8.1 09.02.2021\n";
+			CreateCargoList << "alive 8.2 26.12.2020\n";
+			CreateCargoList << "bulk 4.5 10.03.2020\n";
+			CreateCargoList << "valuable 4.5 18.05.2020\n";
+			CreateCargoList << "alive 5.6 15.04.2020\n";
+			CreateCargoList << "bulk 2.3 14.05.2020\n";
+			CreateCargoList << "dangerous 4.5 02.02.2020\n";
+			CreateCargoList << "bulk 14.5 10.10.2020\n";
+			CreateCargoList << "perishable 7.2 14.11.2020\n";
+			CreateCargoList << "alive 6 24.06.2020\n";
+			CreateCargoList << "bulk 8.5 17.04.2021\n";
+			CreateCargoList << "dangerous 2.2 21.03.2021\n";
+			CreateCargoList << "perishable 1.2 19.05.2021\n";
+			CreateCargoList << "alive 3.8 06.05.2021\n";
+			CreateCargoList << "dangerous 2.2 21.05.2021\n";
+			CreateCargoList << "alive 7.5 01.02.2021\n";
+			CreateCargoList << "valuable 12.5 28.02.2021\n";
+			CreateCargoList << "perishable 3.2 10.01.2021\n";
+			CreateCargoList << "perishable 4.8 19.03.2021\n";
+			CreateCargoList << "perishable 5.9 19.08.2020\n";
+			CreateCargoList << "valuable 8.1 09.02.2021\n";
+			CreateCargoList << "alive 8.2 26.12.2020\n";
+			CreateCargoList << "bulk 4.5 10.03.2020\n";
+			CreateCargoList << "valuable 4.5 18.05.2020\n";
+			CreateCargoList << "alive 5.6 15.04.2020\n";
+			CreateCargoList << "bulk 2.3 14.05.2020\n";
+			CreateCargoList << "dangerous 4.5 02.02.2020\n";
+			CreateCargoList << "bulk 14.5 10.10.2020\n";
+			CreateCargoList << "perishable 7.2 14.11.2020\n";
+			CreateCargoList << "alive 6 24.06.2020\n";
+			CreateCargoList << "bulk 8.5 17.04.2021\n";
+			CreateCargoList << "dangerous 2.2 21.03.2021\n";
+			CreateCargoList << "perishable 1.2 19.05.2021\n";
+			CreateCargoList << "alive 3.8 06.05.2021\n";
+			CreateCargoList << "dangerous 2.2 21.05.2021\n";
+			CreateCargoList << "alive 7.5 01.02.2021\n";
+			CreateCargoList << "valuable 12.5 28.02.2021\n";
+			CreateCargoList << "perishable 3.2 10.01.2021\n";
+			CreateCargoList << "perishable 4.8 19.03.2021\n";
+			CreateCargoList << "perishable 5.9 19.08.2020\n";
+			CreateCargoList << "valuable 8.1 09.02.2021\n";
+			CreateCargoList << "alive 8.2 26.12.2020\n";
+			CreateCargoList << "bulk 4.5 10.03.2020\n";
+			CreateCargoList << "valuable 4.5 18.05.2020\n";
+			CreateCargoList << "alive 5.6 15.04.2020\n";
+			CreateCargoList << "bulk 2.3 14.05.2020\n";
+			CreateCargoList << "dangerous 4.5 02.02.2020\n";
+			CreateCargoList << "bulk 14.5 10.10.2020\n";
+			CreateCargoList << "perishable 7.2 14.11.2020\n";
+			CreateCargoList << "alive 6 24.06.2020\n";
+			CreateCargoList << "bulk 8.5 17.04.2021\n";
+			CreateCargoList << "dangerous 2.2 21.03.2021\n";
+			CreateCargoList << "perishable 1.2 19.05.2021\n";
+			CreateCargoList << "alive 3.8 06.05.2021\n";
+			CreateCargoList << "dangerous 2.2 21.05.2021\n";
+			CreateCargoList << "alive 7.5 01.02.2021\n";
+			CreateCargoList << "valuable 12.5 28.02.2021\n";
+			CreateCargoList << "perishable 3.2 10.01.2021\n";
+			CreateCargoList << "perishable 4.8 19.03.2021\n";
+			CreateCargoList << "perishable 5.9 19.08.2020\n";
+			CreateCargoList << "valuable 8.1 09.02.2021\n";
+			CreateCargoList << "alive 8.2 26.12.2020\n";
+			CreateCargoList << "bulk 4.5 10.03.2020\n";
+			CreateCargoList << "valuable 4.5 18.05.2020\n";
+			CreateCargoList << "alive 5.6 15.04.2020\n";
+			CreateCargoList << "bulk 2.3 14.05.2020\n";
+			CreateCargoList << "dangerous 4.5 02.02.2020\n";
+			CreateCargoList << "bulk 14.5 10.10.2020\n";
+			CreateCargoList << "perishable 7.2 14.11.2020\n";
+			CreateCargoList << "alive 6 24.06.2020\n";
+			CreateCargoList << "bulk 8.5 17.04.2021\n";
+			CreateCargoList << "dangerous 2.2 21.03.2021\n";
+			CreateCargoList << "perishable 1.2 19.05.2021\n";
+			CreateCargoList << "alive 3.8 06.05.2021\n";
+			CreateCargoList << "dangerous 2.2 21.05.2021\n";
+			CreateCargoList << "alive 7.5 01.02.2021\n";
+			CreateCargoList << "valuable 12.5 28.02.2021\n";
+			CreateCargoList << "perishable 3.2 10.01.2021\n";
+			CreateCargoList << "perishable 4.8 19.03.2021\n";
+			CreateCargoList << "perishable 5.9 19.08.2020\n";
+			CreateCargoList << "valuable 8.1 09.02.2021\n";
+			CreateCargoList << "alive 8.2 26.12.2020\n";
+			CreateCargoList << "bulk 4.5 10.03.2020\n";
+			CreateCargoList << "valuable 4.5 18.05.2020\n";
+			CreateCargoList << "alive 5.6 15.04.2020\n";
+			CreateCargoList << "bulk 2.3 14.05.2020\n";
+			CreateCargoList << "dangerous 4.5 02.02.2020\n";
+			CreateCargoList << "bulk 14.5 10.10.2020\n";
+			CreateCargoList << "perishable 7.2 14.11.2020\n";
+			CreateCargoList << "alive 6 24.06.2020\n";
+			CreateCargoList << "bulk 8.5 17.04.2021\n";
+			CreateCargoList << "dangerous 2.2 21.03.2021\n";
+			CreateCargoList << "perishable 1.2 19.05.2021\n";
+			CreateCargoList << "alive 3.8 06.05.2021\n";
+			CreateCargoList << "dangerous 2.2 21.05.2021\n";
+			CreateCargoList << "alive 7.5 01.02.2021\n";
+			CreateCargoList << "valuable 12.5 28.02.2021\n";
+			CreateCargoList << "perishable 3.2 10.01.2021\n";
+			CreateCargoList << "perishable 4.8 19.03.2021\n";
+			CreateCargoList << "perishable 5.9 19.08.2020\n";
+			CreateCargoList << "valuable 8.1 09.02.2021\n";
+			CreateCargoList << "alive 8.2 26.12.2020\n";
+			CreateCargoList << "bulk 4.5 10.03.2020\n";
+			CreateCargoList << "valuable 4.5 18.05.2020\n";
+			CreateCargoList << "alive 5.6 15.04.2020\n";
+			CreateCargoList << "bulk 2.3 14.05.2020\n";
+			CreateCargoList << "dangerous 4.5 02.02.2020\n";
+			CreateCargoList << "bulk 14.5 10.10.2020\n";
+			CreateCargoList << "perishable 7.2 14.11.2020\n";
+			CreateCargoList << "alive 6 24.06.2020\n";
+			CreateCargoList << "bulk 8.5 17.04.2021\n";
+			CreateCargoList << "dangerous 2.2 21.03.2021\n";
+			CreateCargoList << "perishable 1.2 19.05.2021\n";
+			CreateCargoList << "alive 3.8 06.05.2021\n";
+			CreateCargoList << "dangerous 2.2 21.05.2021\n";
+			CreateCargoList << "alive 7.5 01.02.2021\n";
+			CreateCargoList << "valuable 12.5 28.02.2021\n";
+			CreateCargoList << "perishable 3.2 10.01.2021\n";
+			CreateCargoList << "perishable 4.8 19.03.2021\n";
+			CreateCargoList << "perishable 5.9 19.08.2020\n";
+			CreateCargoList << "valuable 8.1 09.02.2021\n";
+			CreateCargoList << "alive 8.2 26.12.2020\n";
+			CreateCargoList << "bulk 4.5 10.03.2020\n";
+			CreateCargoList << "valuable 4.5 18.05.2020\n";
+			CreateCargoList << "alive 5.6 15.04.2020\n";
+			CreateCargoList << "bulk 2.3 14.05.2020\n";
+			CreateCargoList << "dangerous 4.5 02.02.2020\n";
+			CreateCargoList << "bulk 14.5 10.10.2020\n";
+			CreateCargoList << "perishable 7.2 14.11.2020\n";
+			CreateCargoList << "alive 6 24.06.2020\n";
+			CreateCargoList << "bulk 8.5 17.04.2021\n";
+			CreateCargoList << "dangerous 2.2 21.03.2021\n";
+			CreateCargoList << "perishable 1.2 19.05.2021\n";
+			CreateCargoList << "alive 3.8 06.05.2021\n";
+			CreateCargoList << "dangerous 2.2 21.05.2021\n";
+			CreateCargoList << "alive 7.5 01.02.2021\n";
+			CreateCargoList << "valuable 12.5 28.02.2021\n";
+			CreateCargoList << "perishable 3.2 10.01.2021\n";
+			CreateCargoList << "perishable 4.8 19.03.2021\n";
+			CreateCargoList << "perishable 5.9 19.08.2020\n";
+			CreateCargoList << "valuable 8.1 09.02.2021\n";
+			CreateCargoList << "alive 8.2 26.12.2020\n";
+			CreateCargoList << "bulk 4.5 10.03.2020\n";
+			CreateCargoList << "valuable 4.5 18.05.2020\n";
+			CreateCargoList << "alive 5.6 15.04.2020\n";
+			CreateCargoList << "bulk 2.3 14.05.2020\n";
+			CreateCargoList << "dangerous 4.5 02.02.2020\n";
+			CreateCargoList << "bulk 14.5 10.10.2020\n";
+			CreateCargoList << "perishable 7.2 14.11.2020\n";
+			CreateCargoList << "alive 6 24.06.2020\n";
+			CreateCargoList << "bulk 8.5 17.04.2021\n";
+			CreateCargoList << "dangerous 2.2 21.03.2021\n";
+			CreateCargoList << "perishable 1.2 19.05.2021\n";
+			CreateCargoList << "alive 3.8 06.05.2021\n";
+			CreateCargoList << "dangerous 2.2 21.05.2021\n";
+			CreateCargoList << "alive 7.5 01.02.2021\n";
+			CreateCargoList << "valuable 12.5 28.02.2021\n";
+			CreateCargoList << "perishable 3.2 10.01.2021\n";
+			CreateCargoList << "perishable 4.8 19.03.2021\n";
+			CreateCargoList << "perishable 5.9 19.08.2020\n";
+			CreateCargoList << "valuable 8.1 09.02.2021\n";
+			CreateCargoList << "alive 8.2 26.12.2020\n";
+			CreateCargoList << "bulk 4.5 10.03.2020\n";
+			CreateCargoList << "valuable 4.5 18.05.2020\n";
+			CreateCargoList << "alive 5.6 15.04.2020\n";
+			CreateCargoList << "bulk 2.3 14.05.2020\n";
+			CreateCargoList << "dangerous 4.5 02.02.2020\n";
+			CreateCargoList << "bulk 14.5 10.10.2020\n";
+			CreateCargoList << "perishable 7.2 14.11.2020\n";
+			CreateCargoList << "alive 6 24.06.2020\n";
+			CreateCargoList << "bulk 8.5 17.04.2021\n";
+			CreateCargoList << "dangerous 2.2 21.03.2021\n";
+			CreateCargoList << "perishable 1.2 19.05.2021\n";
+			CreateCargoList << "alive 3.8 06.05.2021\n";
+			CreateCargoList << "dangerous 2.2 21.05.2021\n";
+			CreateCargoList << "alive 7.5 01.02.2021\n";
+			CreateCargoList << "valuable 12.5 28.02.2021\n";
+			CreateCargoList << "perishable 3.2 10.01.2021\n";
+			CreateCargoList << "perishable 4.8 19.03.2021\n";
+			CreateCargoList << "perishable 5.9 19.08.2020\n";
+			CreateCargoList << "valuable 8.1 09.02.2021\n";
+			CreateCargoList << "alive 8.2 26.12.2020\n";
+			CreateCargoList << "bulk 4.5 10.03.2020\n";
+			CreateCargoList.close();
+		}
+		
+		void CargoStatistic(){
+			string delim = " ", token1, line, lineMemorizer, category;
+			int counterForAlive = 0, counterForValuable = 0, counterForBulk = 0, counterForDangerous = 0, counterForPerishable = 0, countOfAll = 0;
+			double totalSumOfKg = 0, sumOfKgForAlive = 0, sumOfKgForDangerous = 0, sumOfKgForValuable = 0, sumOfKgForBulk = 0, sumOfKgForPerishable = 0, weigth = 0;
+			double specificShareOfAlive = 0, specificShareOfValuable = 0, specificShareOfBulk = 0, specificShareOfDangerous = 0, specificShareOfPerishable = 0;
+			fstream ReadFromTheCargoList("CargoList.txt");
+			
+			while(getline(ReadFromTheCargoList, line)){
+				size_t pos = 0;
+				int counter = 0; 
+				stringstream Kg;
+				
+				while((pos = line.find(delim)) != std::string::npos){
+					counter++;
+					token1 = line.substr(0, pos);	
+					line.erase(0, pos + delim.length());
+					
+					if(counter == 1){
+						if(token1 == "alive"){
+							category = token1;
+							counterForAlive++;
+						}else if(token1 == "valuable"){
+							category = token1;
+							counterForValuable++;
+						}else if(token1 == "bulk"){
+							category = token1;
+							counterForBulk++;
+						}else if(token1 == "dangerous"){
+							category = token1;
+							counterForDangerous++;
+						}else if(token1 == "perishable"){
+							category = token1;
+							counterForPerishable++;
+						}
+					}
+					
+					if(counter == 2){
+						if(category == "alive"){
+							Kg << token1;
+							Kg >> weigth;
+							sumOfKgForAlive += weigth;
+						}else if(category == "valuable"){
+							Kg << token1;
+							Kg >> weigth;
+							sumOfKgForValuable += weigth;
+						}else if(category == "bulk"){
+							Kg << token1;
+							Kg >> weigth;
+							sumOfKgForBulk += weigth;
+						}else if(category == "dangerous"){
+							Kg << token1;
+							Kg >> weigth;
+							sumOfKgForDangerous += weigth;
+						}else if(category == "perishable"){
+							Kg << token1;
+							Kg >> weigth;
+							sumOfKgForPerishable += weigth;
+						}
+					}
+					
+				}
+			}
+			
+			totalSumOfKg = sumOfKgForAlive + sumOfKgForBulk + sumOfKgForDangerous + sumOfKgForPerishable + sumOfKgForValuable;
+			countOfAll = counterForAlive + counterForBulk + counterForDangerous + counterForPerishable + counterForValuable;	
+			specificShareOfAlive = (double)counterForAlive/(double)countOfAll * 100;
+			specificShareOfBulk = (double)counterForBulk/(double)countOfAll * 100;
+			specificShareOfDangerous = (double)counterForDangerous/(double)countOfAll * 100;
+			specificShareOfPerishable = (double)counterForPerishable/(double)countOfAll * 100;
+			specificShareOfValuable = 	(double)counterForValuable/(double)countOfAll * 100;
+			
+			cout << "Alive cargo: weight - " << sumOfKgForAlive << "; count - " << counterForAlive << "; specific share - " << round(specificShareOfAlive) << "%;\n";
+			cout << "Bulk cargo: weight - " << sumOfKgForBulk << "; count - " << counterForBulk << "; specific share - " << round(specificShareOfBulk) << "%;\n";
+			cout << "Dangerous cargo: weight - " << sumOfKgForDangerous << "; count - " << counterForDangerous << "; specific share - " << round(specificShareOfDangerous) << "%;\n";
+			cout << "Perishable cargo: weight - " << sumOfKgForPerishable << "; count - " << counterForPerishable << "; specific share - " << round(specificShareOfPerishable) << "%;\n";
+			cout << "Valuable cargo: weight - " << sumOfKgForValuable << "; count - " << counterForValuable << "; specific share - " << round(specificShareOfValuable) << "%;\n";
+			cout << "The whole cargo: weight - " << totalSumOfKg << "; count - " << countOfAll << "; specific share - 100%\n";	
+			
+
+		}
+		
+};
