@@ -1,6 +1,9 @@
 It is my first course project, that was created in the second semester of the first course.
+
 Subject: OOP
+
 Theme:   Development of the console database project on the subject area by using C++
+
 Task:    A tourist company in France forms a group of tourists and data on each
 tourist (name, passport data, gender, age, children, in which hotel they want to live)
 sent to the representative office. Representation based on this data
