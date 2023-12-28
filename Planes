@@ -1,0 +1,323 @@
+#include <iostream>
+#include <fstream>
+#include <string> 
+
+using namespace std;
+class Planes{
+	public:
+		void AboutPlanesList(){
+			ofstream Planes("AboutPlanes.txt");
+			Planes << "JetAir 2000, 2023-01-05, 150, 20 kg, 100 L\n";
+			Planes << "SkyFlyer 500, 2023-02-10, 120, 18 kg, 90 L\n";
+			Planes << "AirLink 300, 2023-03-15, 200, 25 kg, 120 L\n";
+			Planes << "AeroJet 400, 2023-04-20, 180, 22 kg, 110 L\n";
+			Planes << "SpeedWings 100, 2023-05-25, 160, 21 kg, 105 L\n";
+			Planes << "FlyMax 800, 2023-06-30, 140, 23 kg, 115 L\n";
+			Planes << "SkyHopper 700, 2023-08-05, 190, 19 kg, 95 L\n";
+			Planes << "AirGlide 600, 2023-09-10, 170, 24 kg, 120 L\n";
+			Planes << "JetExpress 200, 2023-10-15, 130, 20 kg, 100 L\n";
+			Planes << "AeroStar 900, 2023-11-20, 160, 26 kg, 130 L\n";
+			Planes << "SkyReach 1000, 2023-12-25, 180, 25 kg, 120 L\n";
+			Planes << "SpeedWings 500, 2024-01-01, 150, 18 kg, 90 L\n";
+			Planes << "AirLink 300, 2024-02-05, 200, 23 kg, 115 L\n";
+			Planes << "FlyMax 400, 2024-03-10, 140, 22 kg, 110 L\n";
+			Planes << "JetAir 600, 2024-04-15, 160, 20 kg, 100 L\n";
+			Planes << "AeroJet 800, 2024-05-20, 190, 24 kg, 120 L\n";
+			Planes << "SkyFlyer 200, 2024-06-25, 170, 19 kg, 95 L\n";
+			Planes << "AirGlide 1000, 2024-07-30, 130, 26 kg, 130 L\n";
+			Planes << "JetExpress 900, 2024-09-04, 140, 21 kg, 105 L\n";
+			Planes << "AeroStar 700, 2024-10-09, 180, 25 kg, 120 L\n";
+			Planes << "SkyHopper 300, 2024-11-14, 120, 17 kg, 85 L\n";
+			Planes << "SpeedWings 600, 2024-12-19, 150, 23 kg, 115 L\n";
+			Planes << "AirLink 100, 2025-01-24, 200, 19 kg, 95 L\n";
+			Planes << "FlyMax 200, 2025-02-28, 160, 21 kg, 105 L\n";
+			Planes << "JetAir 300, 2025-04-04, 140, 18 kg, 90 L\n";
+			Planes << "AeroJet 500, 2025-05-09, 170, 20 kg, 100 L\n";
+			Planes << "SkyFlyer 700, 2025-06-14, 180, 25 kg, 120 L\n";
+			Planes << "AirGlide 900, 2025-07-19, 150, 23 kg, 115 L\n";
+			Planes << "JetExpress 400, 2025-08-24, 190, 22 kg, 110 L\n";
+			Planes << "SpeedWings 1000, 2025-09-29, 200, 26 kg, 130 L\n";
+			Planes << "AeroStar 200, 2025-11-03, 130, 20 kg, 100 L\n";
+			Planes << "SkyReach 800, 2025-12-08, 160, 24 kg, 120 L\n";
+			Planes << "AirLink 500, 2026-01-13, 140, 18 kg, 90 L\n";
+			Planes << "FlyMax 300, 2026-02-18, 180, 22 kg, 110 L\n";
+			Planes << "JetAir 700, 2026-03-25, 170, 21 kg, 105 L\n";
+			Planes << "AeroJet 100, 2026-04-30, 150, 19 kg, 95 L\n";
+			Planes << "SkyFlyer 900, 2026-06-05, 190, 25 kg, 120 L\n";
+			Planes << "AirGlide 400, 2026-07-10, 160, 23 kg, 115 L\n";
+			Planes << "JetExpress 600, 2026-08-15, 140, 20 kg, 100 L\n";
+			Planes << "SpeedWings 200, 2026-09-20, 180, 24 kg, 120 L\n";
+			Planes << "AeroStar 300, 2026-10-25, 150, 21 kg, 105 L\n";
+			Planes << "SkyHopper 500, 2026-12-01, 130, 17 kg, 85 L\n";
+			Planes << "AirLink 700, 2027-01-06, 190, 25 kg, 120 L\n";
+			Planes << "FlyMax 1000, 2027-02-11, 170, 23 kg, 115 L\n";
+			Planes << "JetAir 400, 2027-03-18, 200, 20 kg, 100 L\n";
+			Planes << "AeroJet 600, 2027-04-23, 140, 22 kg, 110 L\n";
+			Planes << "SkyFlyer 800, 2027-05-28, 160, 19 kg, 95 L\n";
+			Planes << "AirGlide 200, 2027-07-03, 180, 24 kg, 120 L\n";
+			Planes << "JetExpress 300, 2027-08-08, 150, 21 kg, 105 L\n";
+			Planes << "SpeedWings 500, 2027-09-13, 130, 18 kg, 90 L\n";
+			Planes.close();
+		}
+		
+		void ShowThePlaneByDate(){
+			fstream ReadFromPlanes("AboutPlanes.txt");
+			cout << "Please enter the name of plane like this - SkyFlyer 800:\n";
+			string name, date;
+			cin.ignore();
+			getline(cin, name);
+			
+			cout << "Please enter the date(example - 2023-01-05):\n";
+			cin >> date;
+			
+			string delim = ", ", line, token1, lineMemorizer;
+			int flagForAll = 0;
+			while(getline(ReadFromPlanes, line)){
+				lineMemorizer = line;
+				size_t pos = 0;
+				int counter = 0, flagForName = 0, flagForDate = 0;
+				
+				while((pos = line.find(delim)) != std::string::npos){
+					token1 = line.substr(0, pos);
+					counter++;
+					line.erase(0, pos + delim.length());
+					if(counter == 1 && name == token1){
+						flagForName = 1;
+					}
+					
+					if(counter == 2 && date == token1){
+						flagForDate = 1;
+					}
+				}
+				
+				if(flagForDate == 1 && flagForName == 1){
+					flagForAll = 1;
+					counter = 0;
+					
+					while((pos = lineMemorizer.find(delim)) != std::string::npos){
+						token1 = lineMemorizer.substr(0, pos);
+						counter++;
+						lineMemorizer.erase(0, pos + delim.length());
+						
+						if(counter == 1){
+							cout << "Name of plane - " << token1 << endl;
+						}else if(counter == 2){
+							cout << "Date of departure - " << token1 << endl;
+						}else if(counter == 3){
+							cout << "Borroved seats - " << token1 << endl;
+						}else if(counter == 4){
+							cout << "Weigth of cargo - " << token1 << endl;
+							cout << "Cargo volume - " << lineMemorizer << endl;
+						}
+					}			
+				}
+			}
+			
+			if(flagForAll == 0){
+				cout << "There is no plane like " << name << " that has a fly in " << date << endl;
+			}
+			
+		}
+		
+		
+		void CreateAboutFlightsList(){
+			ofstream Flights("AboutFlights.txt");
+			Flights << "JetAir 2000, 2023-01-05\n";
+			Flights << "Sophie Evans, 6.8, Kyiv->Paris, 32109876, Ledogual\n";
+			Flights << "Henry White, 4.1, Kyiv->Paris, 21098765, Olrah\n";
+			Flights << "Emily Thompson, 8.3, Kyiv->Paris, 10987654, Gerdur\n";
+			Flights << "Alexander Hall, 3.5, Kyiv->Paris, 09876543, Sofitel\n";
+			Flights << "Liam Johnson, 4.6, Kyiv->Paris, 98765432, Ledogual\n";
+			Flights << "Emma Anderson, 6.1, Kyiv->Paris, 76543210, Gerdur\n";
+			Flights << "Noah Thompson, 2.9, Kyiv->Paris, 67890543, Sofitel\n";
+			Flights << "Olivia Martinez, 7.3, Kyiv->Paris, 54321098, Olrah\n";
+			Flights << "William Garcia, 5.5, Kyiv->Paris, 43210987, Sofitel\n";
+			Flights << "Ava Robinson, 3.7, Kyiv->Paris, 32109876, Sofitel\n";
+			Flights << "James Clark, 9.2, Kyiv->Paris, 21098765, Ledogual\n";
+			Flights << "Isabella Lewis, 1.8, Kyiv->Paris, 10987654, Sofitel\n";
+			Flights << "Benjamin Lee, 8.9, Kyiv->Paris, 09876543, Gerdur\n";
+			Flights << "Sophia Young, 6.4, Kyiv->Paris, 98765432, Gerdur\n";
+			Flights << "Liam Johnson, 4.6, Kyiv->Paris, 98765432, Olrah\n";
+			Flights << "Emma Anderson, 6.1, Kyiv->Paris, 76543210, Sofitel\n";
+			Flights << "Noah Thompson, 2.9, Kyiv->Paris, 67890543, Gerdur\n";
+			Flights << "Olivia Martinez, 7.3, Kyiv->Paris, 54321098, Sofitel\n";
+			Flights << "William Garcia, 5.5, Kyiv->Paris, 43210987, Ledogual\n";
+			Flights << "Ava Robinson, 3.7, Kyiv->Paris, 32109876, Olrah\n";
+			Flights << "James Clark, 9.2, Kyiv->Paris, 21098765, Olrah\n";
+			Flights << "Isabella Lewis, 1.8, Kyiv->Paris, 10987654, Sofitel\n";
+			Flights << "Benjamin Lee, 8.9, Kyiv->Paris, 09876543, Ledogual\n";
+			Flights << "Sophia Young, 6.4, Kyiv->Paris, 98765432, Sofitel\n";
+			Flights << "Elijah Walker, 3.2, Kyiv->Paris, 87654321, Sofitel\n";
+			Flights << "Mia King, 7.7, Kyiv->Paris, 76543210, Ledogual\n";
+			Flights << "Logan Perez, 5.1, Kyiv->Paris, 65432109, Gerdur\n";
+			Flights << "Charlotte Hill, 9.6, Kyiv->Paris, 54321098, Olrah\n";
+			Flights << "Lucas Turner, 4.3, Kyiv->Paris, 43210987, Ledogual\n";
+			
+			Flights << "AeroStar 900, 2023-11-20\n";
+			Flights << "Loron Fur, 5.6, Paris->London, 96165432, Sofitel\n";
+			Flights << "Emoron Anders, 1.1, Paris->London, 76534810, Ledogual\n";
+			Flights << "Poacher Thomp, 3.9, Paris->London, 67894063, Sofitel\n";
+			Flights << "Olvian Tinez, 4.3, Paris->London, 57846098, Olrah\n";
+			Flights << "Wialam Ciata, 7.5, Paris->London, 43210934, Ledogual\n";
+			Flights << "Morwen Silvra, 6.2, Paris->London, 87654321, Gerdur\n";
+			Flights << "Gilian Moons, 2.8, Paris->London, 76543210, Sofitel\n";
+			Flights << "Rowan Greenleaf, 4.5, Paris->London, 65432109, Ledogual\n";
+			Flights << "Elara Swiftwind, 8.1, Paris->London, 54321098, Olrah\n";
+			Flights << "Caspian Stormrider, 5.9, Paris->London, 43210987, Sofitel\n";
+			Flights << "Luna Nightshade, 3.4, Paris->London, 32109876, Sofitel\n";
+			Flights << "Orion Frostfang, 7.7, Paris->London, 21098765, Ledogual\n";
+			Flights << "Astrid Emberheart, 4.9, Paris->London, 10987654, Ledogual\n";
+			Flights << "Raven Shadowstrike, 8.6, Paris->London, 09876543, Sofitel\n";
+			Flights << "Nova Stormborn, 6.5, Paris->London, 98765432, Gerdur\n";
+			Flights << "Kai Winterfell, 3.7, Paris->London, 87654321, Gerdur\n";
+			Flights << "Zara Starlight, 7.3, Paris->London, 76543210, Sofitel\n";
+			Flights << "Axel Thunderstrike, 5.1, Paris->London, 65432109, Ledogual\n";
+			Flights << "Lara Moonwhisper, 9.2, Paris->London, 54321098, Sofitel\n";
+			Flights << "Caleb Ironheart, 4.2, Paris->London, 43210987, Olrah\n";
+			Flights << "Lyra Frostwing, 7.9, Paris->London, 32109876, Gerdur\n";
+			Flights << "Ethan Shadowblade, 3.6, Paris->London, 21098765, Ledogual\n";
+			Flights << "Aria Emberstone, 8.4, Paris->London, 10987654, Sofitel\n";
+			Flights << "Jasper Stormrider, 5.8, Paris->London, 09876543, Olrah\n";
+			Flights << "Athena Moonstone, 6.9, Paris->London, 98765432, Gerdur\n";
+			Flights << "Felix Frostheart, 3.3, Paris->London, 87654321, Gerdur\n";
+			Flights << "Luna Starfire, 7.1, Paris->London, 76543210, Sofitel\n";
+			Flights << "Casper Thunderstrike, 4.7, Paris->London, 65432109, Gerdur\n";
+			Flights << "Aurora Nightshade, 9.3, Paris->London, 54321098, Gerdur\n";
+			Flights << "Zane Ironcliff, 4.4, Paris->London, 43210987, Olrah\n";
+			Flights << "Nyx Shadowdancer, 8.7, Paris->London, 32109876, Ledogual\n";
+			Flights << "Elijah Emberfall, 5.2, Paris->London, 21098765, Sofitel\n";
+			Flights << "Serenity Moonbeam, 7.6, Paris->London, 10987654, Ledogual\n";
+			Flights << "Xander Frostflame, 6.7, Paris->London, 09876543, Olrah\n";
+			
+			Flights << "FlyMax 800, 2023-06-30\n";
+			Flights << "Lanalod Regem, 6.7, Paris->Stockholm, 78235432, Ledogual\n";
+			Flights << "Poros Dambt, 4.1, Paris->Stockholm, 76358810, Gerdur\n";
+			Flights << "Regrat Trone, 9.9, Paris->Stockholm, 67891420, Sofitel\n";
+			Flights << "Teren Dorad, 18.5, Paris->Stockholm, 78846035, Olrah\n";
+			Flights << "Selena Skystorm, 5.6, Paris->Stockholm, 65341728, Gerdur\n";
+			Flights << "Lucian Frostblade, 8.3, Paris->Stockholm, 56473219, Ledogual\n";
+			Flights << "Aria Moonwhisper, 4.9, Paris->Stockholm, 49328174, Olrah\n";
+			Flights << "Oliver Stormrider, 7.2, Paris->Stockholm, 42987561, Sofitel\n";
+			Flights << "Luna Nightshade, 6.1, Paris->Stockholm, 61394728, Ledogual\n";
+			Flights << "Leo Ironheart, 3.8, Paris->Stockholm, 83264179, Sofitel\n";
+			Flights << "Evelyn Shadowstrike, 9.4, Paris->Stockholm, 94712836, Olrah\n";
+			Flights << "Caleb Winterfell, 5.2, Paris->Stockholm, 52194378, Sofitel\n";
+			Flights << "Aurora Frostwing, 8.9, Paris->Stockholm, 89364127, Ledogual\n";
+			Flights << "Max Thunderstrike, 4.6, Paris->Stockholm, 46283917, Olrah\n";
+			Flights << "Nova Moonstone, 7.7, Paris->Stockholm, 77734789, Sofitel\n";
+			Flights << "Ethan Frostheart, 6.3, Paris->Stockholm, 63618173, Gerdur\n";
+			Flights << "Lara Stormborn, 3.5, Paris->Stockholm, 35627489, Olrah\n";
+			Flights << "Natalie Frostflame, 9.1, Paris->Stockholm, 91923148, Ledogual\n";
+			Flights << "Kai Shadowdancer, 5.8, Paris->Stockholm, 58461327, Ledogual\n";
+			Flights << "Aria Emberfall, 8.2, Paris->Stockholm, 82164139, Sofitel\n";
+			Flights.close();
+		}
+		
+		void ReadFromAboutFlightsList(){
+			fstream ReadFromFlights("AboutFlights.txt");
+			string line, flight, delim = ", ", token1, lineMemorizer, lineForPassengers, lineMemoForPassengers;
+			int checker = 0, counter = 0;
+			cout << "Please enter the name of the plane and the date like in example:\nExample: FlyMax 800, 2023-06-30\n";
+			cin.ignore();
+			getline(cin, flight);
+			
+			
+			while(getline(ReadFromFlights, line)){
+				size_t pos = 0;
+				int counterForPlane = 0;
+				lineMemorizer = line;
+				
+				while((pos = line.find(delim)) != std::string::npos){
+					token1 = line.substr(0, pos);
+					counterForPlane++;
+					line.erase(0, pos + delim.length());
+				}
+				
+				if(lineMemorizer == flight){
+					checker++;		
+				}else if(counterForPlane == 1 && checker > 0){
+					break;
+				}
+				
+				pos = 0;
+				if(checker == 1){
+					counter++;
+					if(counter > 1){
+						int counterForPrinting = 0;
+						
+						while((pos = lineMemorizer.find(delim)) != std::string::npos){
+							token1 = lineMemorizer.substr(0, pos);
+							lineMemorizer.erase(0, pos + delim.length());
+							counterForPrinting++;	
+							int lengthForTheCMD;
+							if(counterForPrinting == 1){						
+								lengthForTheCMD = 20 - token1.length();
+								cout << "|" << token1;
+								for(int i = 0; i<=lengthForTheCMD; i++){
+									cout << " ";
+								}
+							}else if(counterForPrinting == 2){						
+								lengthForTheCMD = 8 - token1.length();
+								cout << "|" << token1;
+								for(int i = 0; i<=lengthForTheCMD; i++){
+									cout << " ";
+								}
+							}else if(counterForPrinting == 3){						
+								lengthForTheCMD = 18 - token1.length();
+								cout << "|" << token1;
+								for(int i = 0; i<=lengthForTheCMD; i++){
+									cout << " ";
+								}
+							}else if(counterForPrinting == 4){						
+								lengthForTheCMD = 9 - token1.length();
+								cout << "|" << token1;
+								for(int i = 0; i<=lengthForTheCMD; i++){
+									cout << " ";
+								}
+								lengthForTheCMD = 9 - line.length();
+								cout << "|" << line;
+								for(int i = 0; i<=lengthForTheCMD; i++){
+									cout << " ";
+								}
+								cout << "|\n";
+							}
+							
+						}
+
+					}else{
+						cout << "\n|";
+						for(int i = 0; i < flight.length() + 7; i++){
+							if(i == 6){
+								cout << "|";
+							}else{
+								cout << "-";
+							}
+						}
+						
+						cout << "|\n|Flight|" << flight << "|\n|";
+						
+						for(int i = 0; i < flight.length() + 7; i++){
+							if(i == 6){
+								cout << "|";
+							}else{
+								cout << "-";
+							}
+						}
+						
+						cout << "|\n\n|---------------------|---------|-------------------|----------|----------|\n"; 
+						cout << "|Initials             |Cargo(kg)|Lugguge tag        |Mark      |Hotel     |\n";
+						cout << "|---------------------|---------|-------------------|----------|----------|\n"; 
+					}
+					
+					
+				}
+				
+		}		 
+		cout << "|---------------------|---------|-------------------|----------|----------|\n"; 
+		
+		if(checker == 0){
+			cout << "We have no information about the " << flight << " flight\n";
+		}
+	}
+	
+};
