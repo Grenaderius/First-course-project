@@ -1,0 +1,141 @@
+#include <iostream>  
+#include <time.h>
+#include<cstdlib>
+#include <fstream>
+#include "CreateTheMainList.cpp"                   
+#include "Excursion.cpp"                                                                          
+#include "Hotels.cpp"   
+#include "Planes.cpp"  
+#include "StorageAndCargo.cpp" 
+#include "Finances.cpp" 
+/* run this program using the console  pauser or add your own getch, system("pause") or input loop */  
+using namespace std;
+int main(int argc, char** argv) { 
+	string scanner;    
+	int counterForOpeningFile = 0;                         
+	srand(time(0));		
+	Planes PlaneObj;
+	Storage StorageObj;
+	Finance FinancialObj;
+	
+	while(scanner!="exit"){
+		cout << "Please enter the keyword:\n";       
+		cin >> scanner;                     
+		cout << endl;	    
+		   
+		TheMainList MainListOperations(scanner);  
+		Excursions ExcursOperations(scanner);  
+		HotelsAndRooms HotelOperations(scanner); 
+		
+	  	if(counterForOpeningFile<1){   
+	  		fstream MainFile("MainList.txt");
+			fstream TouristFile("AboutTourists.txt");
+			fstream PlaneFile("AboutPlanes.txt");
+			fstream StorageFile("Storage.txt");	 
+			fstream CargoFile("CargoList.txt");
+			fstream FlightsFile("AboutFlights.txt");
+			fstream HotelFile("HotelResettlementList.txt");
+			
+			if(!MainFile){
+				MainListOperations.CreateTheFileForTheMainListAndAddDefaultElements();
+			}
+			
+			if(!TouristFile){
+				ExcursOperations.CreateTouristsList();
+			}
+			
+			if(!PlaneFile){
+				PlaneObj.AboutPlanesList(); 
+			}	
+			    
+			if(!StorageFile){
+				StorageObj.CreateStorageAndBaggageWithPlanes();
+			}
+			
+			if(!CargoFile){
+				StorageObj.CreateTheCargoList();				
+			}
+			
+			if(!FlightsFile){
+				PlaneObj.CreateAboutFlightsList();				
+			}
+			
+			if(!HotelFile){
+				HotelOperations.CreateTheHotelList();
+			}
+			
+			MainFile.close();
+			PlaneFile.close();
+			FlightsFile.close();
+			CargoFile.close();
+			TouristFile.close();
+			StorageFile.close();
+			
+		}   
+		         
+		if(scanner == "ShowTheMainList" || scanner == "AddElementsToTheList" || scanner == "ShowMainListByCategories" || scanner == "ShowTouristsStayTimeAndCategory") {                                                   
+			MainListOperations.MainChecker();          
+		}else if(scanner == "CreateTheHotelResList"){                                           
+			HotelOperations.CreateTheHotelList();             
+		}else if(scanner == "ShowTheWholeHotelsResList" || scanner == "ShowHotelResListByHotelsAndCategories"){                       
+			HotelOperations.HotelsChecker();        
+		}else if(scanner == "ShowInfoAboutTourist"){                                   
+			ExcursOperations.ShowTheTouristFromTheList();      
+		}else if(scanner == "CountOfTouristsThatBorExcursesInThePeriod"){        
+			ExcursOperations.CountOFTouristsThatBorovedExursion();
+		}else if(scanner == "ShowTheMostPopularExcAndAg"){         
+			ExcursOperations.TheMostPopExcursAndAgency();
+		}else if(scanner == "ShowTheListOfHotels"){        
+			ExcursOperations.ListOfHotels();   
+		}else if(scanner == "ShowThePlanesRace"){                 
+			PlaneObj.ShowThePlaneByDate();        
+		}else if(scanner == "ShowTheStorageInfoByPeriod"){                      
+			StorageObj.ShowTheStorageByPeriod();        
+		}else if(scanner == "ShowTheFinancialReportForGroupOrCateg"){
+			cout << "Do you want to see financial report by categories(y/n)\n";   
+		 	cin >> scanner;                                     
+			FinancialObj.FinancialReportOnTouristsAndCategories(scanner, 0);  
+		}else if(scanner == "ShowTheStatisticAboutCargo"){                                     
+			StorageObj.CargoStatistic(); 
+		}else if(scanner == "ShowTheRatioOfRestingToShopping"){                                                   
+			ExcursOperations.ratioOfRestingAndShoppingTourists();      
+		}else if(scanner == "ShowTheIncomesAndExpensesByPeriod"){                                               
+			FinancialObj.ExpensesAndIncomeForPeriod();  
+		}else if(scanner == "ShowTheProfitabilityOfAgency"){                                                           
+			FinancialObj.FinancialReportOnTouristsAndCategories("n", 1); 
+			FinancialObj.ProfitabilityOfAgency();        
+		}else if(scanner == "ShowTheInformationAboutFlight"){                                                                                          
+			PlaneObj.ReadFromAboutFlightsList();  
+		}else if(scanner == "?"){
+			cout << "Commands that you can use in our program:\n";
+			cout << "\'ShowTheMainList\' - command that shows all of the information that are in the MainList in other words in the list for customs.\n\n";
+			cout << "\'AddElementsToTheList\' - command that allows you to add elements to the list for custom.\n\n";
+			cout << "\'ShowMainListByCategories\' - command that allows you to choose which category of tourists you want to see from the list for customs.\n\n";
+			cout << "\'ShowTouristsStayTimeAndCategory\' - command that shows count of tourists that were in the country in the entered time or in that time and by categories.\n\n";
+			cout << "\'ShowInfoAboutTourist\' - command that shows information about specific tourist from the AboutTourists list.\n\n";
+			cout << "\'ShowTheListOfHotels\' - command that shows the list of available hotels where tourists are being settled and count of borrowed flats and also weather person lived there in the entered period of time.\n\n";
+			cout << "\'CountOfTouristsThatBorExcursesInThePeriod\' - command that shows count of tourists that borrowed excursions in the entered period.\n\n";
+			cout << "\'ShowTheMostPopularExcAndAg\' - command that shows the most popular excursion and the best quality agency.\n\n"; 
+			cout << "\'ShowThePlanesRace\' - command that shows the loading of the specified flight of the aircraft on a certain the date.\n\n";
+			cout << "\'ShowTheStorageInfoByPeriod\' - command that shows the statistic about freight turnover of the warehouse in the specified time.\n\n";
+			cout << "\'ShowTheFinancialReportForGroupOrCateg\' - command that shows the financial report for a group of tourists or only for one of the categories.\n\n";
+			cout << "\'ShowTheIncomesAndExpensesByPeriod\' - command that shows the information about the incomes and expenses by a period.\n\n";
+			cout << "\'ShowTheStatisticAboutCargo\' - command that shows the statistic about departed cargo.\n\n";
+			cout << "\'ShowTheProfitabilityOfAgency\' - command that shows the profitability of agency.\n\n";
+			cout << "\'ShowTheRatioOfRestingToShopping\' - command that shows the ratio of the resting tourists to the shopping tourists at all and by specified period of time.\n\n";
+			cout << "\'ShowTheInformationAboutFlight\' - command that shows the information about the tourists of the specified flight.\n\n";
+			cout << "\'ShowTheWholeHotelsResList\' - command that shows the content of the whole HotelResettlementList.\n\n"; 
+			cout << "\'ShowHotelResListByHotelsAndCategories\' - command that shows the list on the resetlment and by category.\n\n";
+			cout << "\'CreateTheHotelResList\' - command that alloves you to recreate the hotel list by using the info from the MainList.\n\n";
+			cout << "\'exit\' - command that alloves you to exit from the program.\n";
+		}else if(scanner != "exit"){    
+			cout << "The program does not have such a command as \'" << scanner << "\'. If You want to see available commands please enter the \'?\' ";
+		}    
+		
+		cout << endl;    
+		counterForOpeningFile++; 
+	}       
+	
+	return 0;  
+}    
+
