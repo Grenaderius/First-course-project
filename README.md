@@ -21,17 +21,21 @@ are interested in excursions and are not interested in the composition), on tour
 cargo (they are interested in the warehouse and will not be interested in excursions) and them
 children Children cannot get a visa, relocate themselves, and go anywhere without one
 accompanying parents. Each category of tourists has specific characteristics.
+ 
  The functional duties of the representative office also include:
+
  I. Storage and shipment of tourists' cargo. In the warehouse it is started on
 each tourist has a weight list, marking is carried out,
 weighing, packing cargo. To send cargo
 a report is drawn up for each tourist, it indicates:
 number of seats, weight, cost of packaging, insurance, final sum.
+
  II. Submission of a full financial report to the main company. All articles
 expenses and income - hotel, transportation, excursions, unforeseen
 expenses, calculations at the airport (loading the plane,
 unloading, take-off and landing, dispatching services, storage
 cargo) are transferred to the financial report.
+
 Types of requests in the information system:
 1. Create a list of tourists for customs in general and by the specified category.
 2. To form lists for resettlement for the specified hotels in general and
