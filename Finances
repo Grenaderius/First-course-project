@@ -1,0 +1,337 @@
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+#include <string> 
+#include <sstream> 
+#include <time.h>
+#include <cstdlib>
+
+using namespace std;
+class Finance{
+	
+	double TotalIncome = 0, TotalExpenses = 0;
+	public:
+		
+		void ProfitabilityOfAgency(){
+			
+			int MoneyForPlane = 1000 - rand() % 600 + rand() % 30, MoneyForTour = 0, MoneyForHotel = 0, MoneyForVisa = 0, MoneyForExcursions = 0, MoneyForAdvertising = 200 + rand() % 30 + rand() % 10, OtherSpendings = 0, MoneyForEmployees = 400 - rand() % 80;
+			string delim = " ", token1, token2, line;
+			int countOfLines = 0, year, counterForMultiplic = 0, counterForVisa = 0; 
+			double RatioOfIncomeAndExpenses = 0;
+			fstream ReadFromTheTouristsList("AboutTourists.txt");
+			
+			
+			while(getline(ReadFromTheTouristsList, line)){
+				size_t pos = 0;
+				int counter = 0, counterForHotExc = 0;
+				countOfLines++;	
+				
+				if(countOfLines>2){
+					MoneyForTour += 420;
+					counterForVisa++;
+					MoneyForVisa += 30 + rand() % 50; 
+					OtherSpendings += 10 + rand() % 10; 
+					
+					while((pos = line.find(delim)) != std::string::npos){
+						token1 = line.substr(0, pos);
+						line.erase(0, pos + delim.length());
+						counterForHotExc++;
+						
+						if(counterForHotExc == 8 && token1 != "none"){
+							counterForMultiplic++;
+							if(token1 == "Olrah"){
+								MoneyForHotel += 65;
+							}else if(token1 == "Gerdur"){
+								MoneyForHotel += 55;
+							}else if(token1 == "Ledogual"){
+								MoneyForHotel += 52;
+							}else if(token1 == "Sofitel"){
+								MoneyForHotel += 85;
+							}
+						}else if(counterForHotExc == 9){
+							if(token1 == "ParisFromTheSky"){
+								MoneyForExcursions += 25;
+							}else if(token1 == "FrancesClothesBrands_DevicesTour"){
+								MoneyForExcursions += 68;
+							}else if(token1 == "NiceBeachRelaxation"){
+								MoneyForExcursions += 11;
+							}else if(token1 == "ParisFashionDistrict_Galeries"){
+								MoneyForExcursions += 82;
+							}else if(token1 == "BiarritzSurfing"){
+								MoneyForExcursions += 22;
+							}else if(token1 == "Paris"){
+								MoneyForHotel += 10;
+							}
+						}else if(counterForHotExc > 9){
+							break;
+						}
+							
+						
+					}
+					
+				}
+			}
+			
+			MoneyForTour += MoneyForHotel + counterForMultiplic * 10 + MoneyForExcursions + MoneyForVisa + 5 * counterForVisa;
+			TotalIncome += MoneyForTour;
+			TotalExpenses += MoneyForVisa + MoneyForPlane + MoneyForHotel + MoneyForEmployees + MoneyForExcursions + MoneyForAdvertising + OtherSpendings;
+			RatioOfIncomeAndExpenses = TotalIncome/TotalExpenses * 100;
+			cout << "Total income is " << fixed << setprecision(0) << TotalIncome << "$\n";
+			cout << "Total expenses is " << fixed << setprecision(0) << TotalExpenses << "$\n";
+			cout << "The profitability of the agency is " << setprecision(3) << RatioOfIncomeAndExpenses << "%\n";
+		}
+		
+		void FinancialReportOnTouristsAndCategories(string scanner, int check){
+			fstream ReadFromTheMainList("MainList.txt");
+		 	int countOfLines = 0, sumOfMoneyForPeople = 0, sumOfMoneyForChild = 0, childs, flag = 0;
+		 	double baggage, sumOfMoneyForBaggage = 0, sum = 0, sumOfRandomSpendings = 0;
+		 	string delim = " ", line, token1, scanCategory, categorizer, lineMemorizer;
+		 	
+		 	if(scanner == "y"){
+		 		cout << "Please print the number from 1 to 3 to see the list sorted by categories, where 1 = resting, 2 = baggage, 3 = shopping:\n";
+				cin >> scanCategory;
+				
+				if(scanCategory == "1" || scanCategory == "2" || scanCategory == "3"){
+					if(scanCategory == "1"){
+						categorizer = "resting";
+					}else if(scanCategory == "2"){
+						categorizer = "baggage";
+					}else{
+						categorizer = "shopping";
+					}
+										
+					while(getline(ReadFromTheMainList, line)){
+						size_t pos = 0;
+						int counter = 0; 
+						countOfLines++;
+						
+						if(countOfLines > 2){
+							lineMemorizer = line;
+						
+							while((pos = lineMemorizer.find(delim)) != std::string::npos){
+								counter++;
+								token1 = lineMemorizer.substr(0, pos);
+								lineMemorizer.erase(0, pos + delim.length());
+								if(counter == 10 && categorizer == token1){
+									flag = 1;
+								}
+							}
+							counter = 0;
+							
+							if(flag == 1){
+								sumOfMoneyForPeople += 100;
+								stringstream ch, bg;
+								
+								while((pos = line.find(delim)) != std::string::npos){
+									counter++;
+									token1 = line.substr(0, pos);
+									line.erase(0, pos + delim.length());
+									 if(counter == 7){
+									 	ch << token1;
+									 	ch >> childs;
+									 	sumOfMoneyForChild += 50*childs;
+									 	sumOfRandomSpendings += -20 + rand() % 100;
+									 }
+									 
+									 if(counter == 9){
+									 	bg << token1;
+									 	bg >> baggage;
+									 	sumOfMoneyForBaggage += 2*baggage;
+									 }
+									 
+								}
+							}
+							
+							flag = 0;
+							
+						}
+					}
+				
+					sum = sumOfMoneyForBaggage + sumOfMoneyForChild + sumOfMoneyForPeople - sumOfRandomSpendings;
+					cout << "Amount of money for tourists - " << sumOfMoneyForPeople << "$\n";
+					cout << "Amount of money for childs - " << sumOfMoneyForChild << "$\n";
+					cout << "Amount of money for baggage - " << sumOfMoneyForBaggage << "$\n";
+					cout << "Amount of money for incidental expendes - " << sumOfRandomSpendings << "$\n";
+					cout << "Total amount of money for tourists - " << sum << "$\n";
+					
+				}else{
+					cout << "There is no category by number - " << scanCategory << endl;
+				}
+		 		
+		 		
+			 }else if(scanner == "n"){
+			 	while(getline(ReadFromTheMainList, line)){
+					size_t pos = 0;
+					int counter = 0; 
+					countOfLines++;
+					
+					
+					if(countOfLines > 2){
+						sumOfMoneyForPeople += 100;
+						stringstream ch, bg;		
+						
+						while((pos = line.find(delim)) != std::string::npos){
+							counter++;
+							token1 = line.substr(0, pos);
+							line.erase(0, pos + delim.length());
+							 if(counter == 7){
+							 	ch << token1;
+							 	ch >> childs;
+							 	sumOfMoneyForChild += 50*childs;
+							 	sumOfRandomSpendings += -20 + rand() % 100;
+							 }
+							 
+							 if(counter == 9){
+							 	bg << token1;
+							 	bg >> baggage;
+							 	sumOfMoneyForBaggage += 2*baggage;
+							 }
+			
+						}
+						
+					}
+				}
+				
+				if(check == 0){
+					sum = sumOfMoneyForBaggage + sumOfMoneyForChild + sumOfMoneyForPeople - sumOfRandomSpendings;
+					cout << "Amount of money for tourists - " << sumOfMoneyForPeople << "$\n";
+					cout << "Amount of money for childs - " << sumOfMoneyForChild << "$\n";
+					cout << "Amount of money for baggage - " << sumOfMoneyForBaggage << "$\n";
+					cout << "Amount of money for incidental expendes - " << sumOfRandomSpendings << "$\n";
+					cout << "Total amount of money for tourists - " << sum << "$\n";
+				}else if(check == 1){
+					TotalIncome = 0;
+				    TotalExpenses = 0;
+					TotalExpenses = sumOfRandomSpendings;
+					TotalIncome = sumOfMoneyForBaggage + sumOfMoneyForChild + sumOfMoneyForPeople;
+					
+				}
+				
+			 }else{
+			 	cout << "There is no answer like - " << scanner << endl;
+			 }
+		 	
+		}
+		
+		
+		void ExpensesAndIncomeForPeriod(){
+			int MoneyForPlane = 1000 - rand() % 600 + rand() % 30, MoneyForTour = 0, MoneyForHotel = 0, MoneyForVisa = 0, MoneyForExcursions = 0, MoneyForAdvertising = 200 + rand() % 30 + rand() % 10, OtherSpendings = 0, MoneyForEmployees = 400 - rand() % 80;
+			string delim = " ", token1, token2, line, lineMemorizer, delimForYear = ".";
+			int countOfLines = 0, year, counterForMultiplic = 0, counterForVisa = 0, checker = 0; 
+			fstream ReadFromTheTouristsList("AboutTourists.txt");
+			
+			cout << "Please enter the year, that you want to see information about expentions and income:\n";
+			cin >> year;
+			
+				while(getline(ReadFromTheTouristsList, line)){
+					size_t pos = 0;
+					
+					int counter = 0, yearForArrived = 0, yearForDeparted = 0, counterForSplittingTime = 0, counterForTime = 0; 
+					lineMemorizer = line;
+					countOfLines++;
+					if(countOfLines>2){
+						while((pos = lineMemorizer.find(delim)) != std::string::npos){
+							counterForTime++;
+							token1 = lineMemorizer.substr(0, pos);
+							lineMemorizer.erase(0, pos + delim.length());
+							stringstream yr, dd, md, yd; 
+							
+							if(counterForTime == 6){
+							counterForSplittingTime = 0;
+	
+								while((pos = token1.find(delimForYear)) != std::string::npos){
+									token2 = token1.substr(0, pos);
+									token1.erase(0, pos + delimForYear.length());	
+									counterForSplittingTime++;
+						
+									if(counterForSplittingTime == 2){
+										yr << token1;
+										yr >> yearForArrived;
+									}			
+								
+								}
+							}
+							
+							if(counterForTime == 7){
+								counterForSplittingTime = 0;
+							
+								while((pos = token1.find(delimForYear)) != std::string::npos){
+									token2 = token1.substr(0, pos);
+									token1.erase(0, pos + delimForYear.length());	
+									counterForSplittingTime++;
+						
+									if(counterForSplittingTime == 2){
+										yr << token1;
+										yr >> yearForDeparted;
+									}					
+								}
+							}
+							
+							
+							if(year<=yearForDeparted && year>= yearForArrived && counterForTime == 7){
+								counterForVisa++;
+								MoneyForVisa += 30 + rand() % 50; 
+								OtherSpendings += 10 + rand() % 10; 
+								int counterForHotExc = 0;
+								MoneyForTour += 420;
+								checker = 1;
+									
+								while((pos = line.find(delim)) != std::string::npos){
+									counterForHotExc++;
+									token1 = line.substr(0, pos);
+									line.erase(0, pos + delim.length());
+									
+									if(counterForHotExc == 8 && token1 != "none"){
+										counterForMultiplic++;
+										if(token1 == "Olrah"){
+											MoneyForHotel += 65;
+										}else if(token1 == "Gerdur"){
+											MoneyForHotel += 55;
+										}else if(token1 == "Ledogual"){
+											MoneyForHotel += 52;
+										}else if(token1 == "Sofitel"){
+											MoneyForHotel += 85;
+										}
+									}else if(counterForHotExc == 9){
+										if(token1 == "ParisFromTheSky"){
+											MoneyForExcursions += 25;
+										}else if(token1 == "FrancesClothesBrands_DevicesTour"){
+											MoneyForExcursions += 68;
+										}else if(token1 == "NiceBeachRelaxation"){
+											MoneyForExcursions += 11;
+										}else if(token1 == "ParisFashionDistrict_Galeries"){
+											MoneyForExcursions += 82;
+										}else if(token1 == "BiarritzSurfing"){
+											MoneyForExcursions += 22;
+										}else if(token1 == "Paris"){
+											MoneyForHotel += 10;
+										}
+									}else if(counterForHotExc > 9){
+										break;
+									}
+									
+							}	
+							}
+							
+						}
+					}
+					
+
+			}
+			
+			
+			if(checker == 0){
+				cout << "There is no information about " << year << " year\n";
+			}else{
+				cout << "Total count of money, that agency needs to pay for visas - " << MoneyForVisa << "$\n";
+				cout << "Total count of money, that agency needs to pay for aircraft maintenance - " << MoneyForPlane << "$\n";
+				cout << "Total count of money, that agency needs to pay for hotels - " << MoneyForHotel << "$\n";
+				cout << "Total count of money, that agency needs to pay to employees - " << MoneyForEmployees << "$\n";
+				cout << "Total count of money, that agency needs to pay for excursions - " << MoneyForExcursions << "$\n";
+				cout << "Total count of money, that agency needs to pay for advertising - " << MoneyForAdvertising << "$\n";
+				cout << "Total count of money, that agency needs to pay for other spendings - " << OtherSpendings << "$\n";
+				MoneyForTour += MoneyForHotel + counterForMultiplic * 10 + MoneyForExcursions + MoneyForVisa + 5 * counterForVisa;
+				cout << "Total count of money, that agency received for tours - " << MoneyForTour << "$\n";
+			}
+		}
+};
