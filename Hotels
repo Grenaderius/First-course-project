@@ -1,0 +1,359 @@
+#include <iostream>
+#include <fstream>
+#include <string>  
+
+using namespace std;
+class HotelsAndRooms{
+	string guide;
+	public:
+		
+		HotelsAndRooms(string called){
+			guide = called;
+		}
+		
+		void CreateTheHotelList(){
+			ofstream CreateHotelResettlementList("HotelResettlementList.txt");
+			fstream ReadFromTheMainList("MainList.txt");
+			
+			string line, delim = " ", token1;
+			int counterOfLines = 0;
+			
+			while(getline(ReadFromTheMainList, line)){
+				size_t pos = 0;
+				counterOfLines++;
+				int counter = 0;
+				
+				while((pos = line.find(delim)) != std::string::npos){
+					token1 = line.substr(0, pos);
+					line.erase(0, pos + delim.length());
+					counter++;
+									
+					if(counter == 1 || counter == 2 || counter == 3 || counter == 7 || counter == 8 || counter == 10 || counter == 11){
+						CreateHotelResettlementList << token1 << " ";
+					}
+					 
+					if(counter == 11){
+						CreateHotelResettlementList << line << "\n";
+					}
+						
+					}	
+					
+				}
+			
+			
+			ReadFromTheMainList.close();
+			CreateHotelResettlementList.close();
+			cout << "The hotel resettlement list has been created!\n";
+		}
+		
+		void HotelsChecker(){
+			if(guide == "ShowTheWholeHotelsResList"){
+				string line, memory, delim = " ", token1;
+				int countOfLines = 0;
+				fstream ReadFromTheWholeHotelsResList("HotelResettlementList.txt");
+				while(getline(ReadFromTheWholeHotelsResList, line)){
+					size_t pos = 0;
+					int counter = 0; 
+					countOfLines++;
+					cout << "|";
+					
+					while((pos = line.find(delim)) != std::string::npos){
+						counter++;
+						token1 = line.substr(0, pos);
+						cout << token1;
+						
+							int lengthForTheCMD = 16 - token1.length();
+							for(int i = 0; i<lengthForTheCMD-1; i++){
+								if(countOfLines !=2){
+									cout << " ";
+								}else{
+									cout << "-";
+								}
+							}
+							cout << "|";
+						
+						line.erase(0, pos + delim.length());
+						
+						if(counter == 7 && countOfLines > 1){
+							cout << line << "|";
+						}else if(counter == 7){
+							cout << line << "    |";
+						}
+					}
+					cout << "\n";
+				}
+				
+			ReadFromTheWholeHotelsResList.close();
+			}
+			
+			if(guide == "ShowHotelResListByHotelsAndCategories"){
+				string watcher;
+				
+				while(watcher != "OP_Finish"){
+					string questioner, categorizer;
+					string scanForCategorizer;
+					cout << "Do you want to see the list sorted not only by Hotels but by categories? (y/n)\n";
+					cin >> questioner;
+					if(questioner != "y" && questioner != "n"){
+						cout << "There is no command like that, please enter the \'y\' or \'n\'\n";
+						continue;
+					}else if(questioner == "y"){
+						cout << "Please print the number from 1 to 3 to see the list sorted by categories, where 1 = resting, 2 = baggage, 3 = shopping:\n";
+						cin >> scanForCategorizer;
+						
+						
+						if(scanForCategorizer == "1"){
+							categorizer = "resting";
+						}else if(scanForCategorizer == "2"){
+							categorizer = "baggage";
+						}else if(scanForCategorizer == "3"){
+							categorizer = "shopping";
+					
+						}else{
+							cout << "There is no categories like " << scanForCategorizer << "\n";
+							continue;
+						}
+					}
+					
+					
+					
+					cout << "\nPlease enter the name of the hotel that you want to see information about tourists or enter OP_Finish to end this operation:\n";
+					cin >> watcher;
+				
+					string line, memory, delim = " ", token1;
+					int countOfLinesForTital = 0, counterForPrintingTitalForHotel = 0, counterForPrintingTitalForCategory = 0;
+					fstream ReadFromTheWholeHotelsResListForTital("HotelResettlementList.txt");
+					fstream ReadFromTheWholeHotelsResListForTital1("HotelResettlementList.txt");
+					
+					
+					
+					while(getline(ReadFromTheWholeHotelsResListForTital1, line)){
+						size_t pos = 0;
+						int counter = 0, counterForCateg = 0; 
+								
+						while((pos = line.find(delim)) != std::string::npos){
+						token1 = line.substr(0, pos);
+							counter++;
+							counterForCateg++;
+							if(token1 == watcher && counter == 5){
+								counterForPrintingTitalForHotel++;
+							}
+							
+							if(token1 == categorizer && counter == 6){
+								counterForPrintingTitalForCategory++;
+							}
+							
+							line.erase(0, pos + delim.length());
+						}
+					}
+						
+						
+						
+					if(counterForPrintingTitalForHotel !=0){
+						
+						if(questioner == "y"){
+							while(getline(ReadFromTheWholeHotelsResListForTital, line)){
+							size_t pos = 0;
+							int counter = 0; 
+							countOfLinesForTital++;
+							
+							if(countOfLinesForTital <= 2){
+								cout << "|";
+						
+								while((pos = line.find(delim)) != std::string::npos){
+									counter++;
+									token1 = line.substr(0, pos);
+									cout << token1;
+						
+									int lengthForTheCMD = 16 - token1.length();
+									for(int i = 0; i<lengthForTheCMD-1; i++){
+										if(countOfLinesForTital !=2){
+											cout << " ";
+										}else{
+											cout << "-";
+										}
+									}
+									cout << "|";
+						
+									line.erase(0, pos + delim.length());
+						
+									if(counter == 7 && countOfLinesForTital > 1){
+										cout << line << "|";
+									}else if(counter == 7){
+										cout << line << "    |";
+									}
+								}
+								cout << "\n";
+							}
+							}
+				
+							ReadFromTheWholeHotelsResListForTital.close();
+							
+							
+							int countOfLines = 0, counterForNoHotel = 0;
+							string token2, token3;
+							fstream ReadFromTheWholeHotelsResList("HotelResettlementList.txt");
+							while(getline(ReadFromTheWholeHotelsResList, line)){
+								size_t pos = 0;
+								int counter = 0; 
+								int counterForMemorized = 0, counterForMemorizedForCategories = 0; 
+								countOfLines++;
+								string lineMemorizer = line, lineMemorizerForCategory = line;
+						
+								while((pos = line.find(delim)) != std::string::npos){
+									token1 = line.substr(0, pos);
+									counter++;
+							
+									if(token1 == watcher && counter == 5){
+							
+										while((pos = lineMemorizerForCategory.find(delim)) != std::string::npos){
+										token3 = lineMemorizerForCategory.substr(0, pos);
+										counterForMemorizedForCategories++;
+								
+											if(token3 == categorizer && counterForMemorizedForCategories == 6){
+		
+												while((pos = lineMemorizer.find(delim)) != std::string::npos){
+													token2 = lineMemorizer.substr(0, pos);
+													counterForMemorized++;
+							
+													if(counterForMemorized == 1){
+														cout << "|";
+													}
+									
+													cout << token2;
+							
+													int lengthForTheCMD = 16 - token2.length();
+													for(int i = 0; i<lengthForTheCMD-1; i++){
+														if(countOfLines !=2){
+															cout << " ";
+														}else{
+															cout << "-";
+														}
+													}
+													cout << "|";
+													
+													lineMemorizer.erase(0, pos + delim.length());
+													if(counterForMemorized == 7 && countOfLines > 1){
+														cout << lineMemorizer << "|";
+													}else if(counterForMemorized == 7){
+														cout << lineMemorizer << "    |";
+													}
+								
+												}
+												cout << "\n";
+										
+											}
+											lineMemorizerForCategory.erase(0, pos + delim.length());
+										}
+									}
+								
+							
+								line.erase(0, pos + delim.length());
+								}
+							}
+							cout << endl;
+							
+						}else{
+							while(getline(ReadFromTheWholeHotelsResListForTital, line)){
+							size_t pos = 0;
+							int counter = 0; 
+							countOfLinesForTital++;
+							
+							if(countOfLinesForTital <= 2){
+								cout << "|";
+						
+								while((pos = line.find(delim)) != std::string::npos){
+									counter++;
+									token1 = line.substr(0, pos);
+									cout << token1;
+						
+									int lengthForTheCMD = 16 - token1.length();
+									for(int i = 0; i<lengthForTheCMD-1; i++){
+										if(countOfLinesForTital !=2){
+											cout << " ";
+										}else{
+											cout << "-";
+										}
+									}
+									cout << "|";
+						
+									line.erase(0, pos + delim.length());
+						
+									if(counter == 7 && countOfLinesForTital > 1){
+										cout << line << "|";
+									}else if(counter == 7){
+										cout << line << "    |";
+									}
+								}
+								cout << "\n";
+							}
+							}
+				
+							ReadFromTheWholeHotelsResListForTital.close();
+						
+						
+							int countOfLines = 0, counterForNoHotel = 0;
+							string token2;
+							fstream ReadFromTheWholeHotelsResList("HotelResettlementList.txt");
+							while(getline(ReadFromTheWholeHotelsResList, line)){
+								size_t pos = 0;
+								int counter = 0; 
+								int counterForMemorized = 0; 
+								countOfLines++;
+								string lineMemorizer = line;
+						
+								while((pos = line.find(delim)) != std::string::npos){
+									token1 = line.substr(0, pos);
+									counter++;
+							
+									if(token1 == watcher && counter == 5){
+										counterForNoHotel++;
+										while((pos = lineMemorizer.find(delim)) != std::string::npos){
+											token2 = lineMemorizer.substr(0, pos);
+											counterForMemorized++;
+							
+								
+											if(counterForMemorized == 1){
+												cout << "|";
+											}
+								
+											cout << token2;
+								
+											int lengthForTheCMD = 16 - token2.length();
+											for(int i = 0; i<lengthForTheCMD-1; i++){
+												if(countOfLines !=2){
+													cout << " ";
+												}else{
+													cout << "-";
+												}
+											}
+											cout << "|";
+											
+											lineMemorizer.erase(0, pos + delim.length());
+											if(counterForMemorized == 7 && countOfLines > 1){
+												cout << lineMemorizer << "|";
+											}else if(counterForMemorized == 7){
+												cout << lineMemorizer << "    |";
+											}
+								
+										}
+										cout << "\n";
+									}
+							
+								line.erase(0, pos + delim.length());
+								}
+							}
+							cout << endl;
+						
+						}
+											
+					}else if(watcher != "OP_Finish"){
+						cout << "There is no hotels like " << watcher << "\n";
+					}
+		
+				}
+			
+		}
+			
+		}	
+};
